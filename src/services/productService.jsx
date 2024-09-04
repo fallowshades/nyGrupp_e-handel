@@ -18,7 +18,7 @@ const ProductService = () => {
     getData();
   }, []);
   return products ? (
-    <div className="displayProduct grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="displayProduct grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 border-gray-100 border m-4 p-10">
       {products.map((product) => (
         <ProductCard
           imgSrc={product.image}
