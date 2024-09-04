@@ -1,4 +1,4 @@
-import { CartItem } from "./pages";
+import { CartPage } from "./pages";
 import { ProductPage } from "./pages";
 import { HomePage } from "./pages";
 
@@ -16,8 +16,8 @@ const router = createBrowserRouter([
         element: <ProductPage />,
       },
       {
-        path: "/CartItem",
-        element: <CartItem />,
+        path: "/CartPage",
+        element: <CartPage />,
       },
       {
         path: "/ProductId/:id",
