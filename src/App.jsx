@@ -2,6 +2,9 @@ import { CartPage, HomePage, ProductPage } from "./pages";
 import Layout from "./components/layout/Layout";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ProductId from "./pages/[ProductId]";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchProducts } from "./redux/slice/productSlice";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +30,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
   return <RouterProvider router={router} />;
 }
 
