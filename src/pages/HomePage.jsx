@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
 import ProductCard from "../components/ProductCard";
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -20,7 +23,7 @@ const HomePage = () => {
 
   return (
     <div className="align-element py-20">
-      <nav>navbar</nav>
+      <Header />
       <div className="displayProduct grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {products.map((product) => (
           <ProductCard
@@ -32,7 +35,7 @@ const HomePage = () => {
         ))}
       </div>
       <Outlet /> <Link to="/CartItem">CartItem</Link>
-      <footer>footer</footer>
+      <Footer />
     </div>
   );
 };
