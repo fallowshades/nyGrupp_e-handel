@@ -3,19 +3,27 @@ import { ProductPage } from './pages'
 import { HomePage } from './pages'
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import ProductId from './pages/[ProductId]'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <HomePage />,
-  },
-  {
-    path: '/Cartitem',
-    element: <CartItem />,
-  },
-  {
-    path: '/Product',
-    element: <ProductPage />,
+
+    children: [
+      {
+        path: '/Product',
+        element: <ProductPage />,
+      },
+      {
+        path: '/Cartitems',
+        element: <CartItem />,
+      },
+      {
+        path: '/ProductId/:id',
+        element: <ProductId />,
+      },
+    ],
   },
 ])
 
