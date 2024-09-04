@@ -2,11 +2,12 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
 import ProductService from "../services/ProductService";
+import Navbar from "../components/Navbar";
 
 const HomePage = () => {
   return (
     <div>
-      HomePage!
+      <Navbar />
       <ProductService />
       <Outlet />
     </div>
