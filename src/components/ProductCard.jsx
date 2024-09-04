@@ -1,15 +1,21 @@
 import React from "react";
 
-const ProductCard = ({ imgSrc, imgAlt, title, price, onClick }) => {
+const ProductCard = ({ products }) => {
   return (
-    <div>
-      <div>
-        <img src={imgSrc} alt={imgAlt} />
-      </div>
-      <div>
-        <h1>{title}</h1>
-        <p>{price}</p>
-        <button onClick={onClick}>Add to cart</button>
+    <div className="align-element py-20">
+      <div className="displayProduct grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {products.map((product) => (
+          <div key={product.id} className=" border p-4 rounded shadow">
+            <img
+              src={product.image}
+              alt={product.title}
+              className="w-full h-48 object-cover mb-2"
+            />
+            <h2 className="text-lg font-semibold">{product.title}</h2>
+            <p className="text-gray-500">{product.price} SEK</p>
+            <p className="text-gray-500">{product.description}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
