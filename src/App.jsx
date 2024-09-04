@@ -1,34 +1,34 @@
-import { CartItem } from './pages'
-import { ProductPage } from './pages'
-import { HomePage } from './pages'
+import { CartItem } from "./pages";
+import { ProductPage } from "./pages";
+import { HomePage } from "./pages";
 
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import ProductId from './pages/[ProductId]'
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import ProductId from "./pages/[ProductId]";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <HomePage />,
 
     children: [
       {
-        path: '/Product',
+        path: "/Product",
         element: <ProductPage />,
       },
       {
-        path: '/Cartitems',
+        path: "/CartItem",
         element: <CartItem />,
       },
       {
-        path: '/ProductId/:id',
+        path: "/ProductId/:id",
         element: <ProductId />,
       },
     ],
   },
-])
+]);
 
 function App() {
-  return <RouterProvider router={router} />
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
