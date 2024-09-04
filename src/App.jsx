@@ -1,26 +1,25 @@
-import { CartPage } from "./pages";
-import { ProductPage } from "./pages";
-import { HomePage } from "./pages";
-
+import { CartPage, HomePage, ProductPage } from "./pages";
+import Layout from "./components/layout/Layout";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ProductId from "./pages/[ProductId]";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
+    element: <Layout />,
 
     children: [
+      { index: true, element: <HomePage /> },
       {
-        path: "/Product",
+        path: "Product",
         element: <ProductPage />,
       },
       {
-        path: "/CartPage",
+        path: "CartPage",
         element: <CartPage />,
       },
       {
-        path: "/ProductId/:id",
+        path: "ProductId/:id",
         element: <ProductId />,
       },
     ],

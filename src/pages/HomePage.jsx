@@ -9,8 +9,7 @@ const HomePage = () => {
     <div>
       <Navbar />
       <ProductService />
-      <Outlet /> <Link to="/CartPage">CartPage</Link>
-      <footer>footer</footer>
+      <Outlet />
     </div>
   );
 };
