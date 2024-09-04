@@ -17,10 +17,19 @@ const ProductService = () => {
     }
     getData();
   }, []);
-  return (
-    <div>
-      <ProductCard products={products} />
+  return products ? (
+    <div className="grid grid-cols-1">
+      {products.map((product) => (
+        <ProductCard
+          imgSrc={product.image}
+          imgAlt={product.title}
+          title={product.title}
+          price={product.price}
+        />
+      ))}
     </div>
+  ) : (
+    <div>Loading..</div>
   );
 };
 
