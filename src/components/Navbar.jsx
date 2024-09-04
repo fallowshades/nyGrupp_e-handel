@@ -1,18 +1,32 @@
 import React from "react";
+import { FaShoppingCart } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 
 function Navbar() {
   return (
-    <nav className="bg-white shadow p-4">
-      <div className="container mx-auto flex items-center justify-evenly">
+    <nav className=" shadow p-4 bg-gray-800 w-full">
+      <div className="mx-auto flex items-center justify-between">
         <div>
-          <img src="logo.png" alt="Logo" className="w-[80px]" />
+          <img
+            src="logo.png"
+            alt="Logo"
+            className="w-[120px] h-[60px]  rounded-md"
+          />
         </div>
-        <div className="flex-grow mx-4">
+        <div className="flex justify-center">
           <input
             type="text"
             placeholder="Search"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-[80%] px-8 py-2 border border-gray-300 border-r-0 rounded-l-lg focus:outline-none"
           />
+          <div className="py-2 bg-white rounded-r-lg pr-2">
+            <FaSearch color="Gray" size={24} />
+          </div>
+        </div>
+        <div>
+          <button className="border-white border py-3 px-8 rounded-lg hover:scale-105">
+            <FaShoppingCart color="White" size={24} />
+          </button>
         </div>
       </div>
     </nav>
