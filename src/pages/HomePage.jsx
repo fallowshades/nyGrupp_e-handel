@@ -6,9 +6,9 @@ import ProductService from "../services/ProductService";
 const HomePage = () => {
   return (
     <div>
+      HomePage!
       <ProductService />
-      <Outlet /> <Link to="/CartPage">CartPage</Link>
-      <footer>footer</footer>
+      <Outlet />
     </div>
   );
 };
