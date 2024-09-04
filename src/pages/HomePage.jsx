@@ -4,6 +4,9 @@ import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
+import { useState, useEffect } from "react";
+
+import ProductCard from "../components/ProductCard";
 const HomePage = () => {
   const [products, setProducts] = useState([]);
 
@@ -25,16 +28,12 @@ const HomePage = () => {
       <Header />
       <div className="displayProduct grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {products.map((product) => (
-          <div key={product.id} className=" border p-4 rounded shadow">
-            <img
-              src={product.image}
-              alt={product.title}
-              className="w-full h-48 object-cover mb-2"
-            />
-            <h2 className="text-lg font-semibold">{product.title}</h2>
-            <p className="text-gray-500">{product.price} SEK</p>
-            <p className="text-gray-500">{product.description}</p>
-          </div>
+          <ProductCard
+            imgSrc={product.image}
+            imgAlt={product.title}
+            price={product.price}
+            title={product.title}
+          />
         ))}
       </div>
       <Outlet /> <Link to="/CartItem">CartItem</Link>
