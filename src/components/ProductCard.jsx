@@ -2,7 +2,7 @@ import React from "react";
 
 const ProductCard = ({ imgSrc, imgAlt, title, price, onClick }) => {
   return (
-    <div className="border p-4 rounded shadow">
+    <div className="border p-4 rounded shadow hover:scale-105 transition-transform hover:shadow-lg">
       <img
         src={imgSrc}
         alt={imgAlt}
