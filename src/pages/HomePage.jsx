@@ -7,7 +7,7 @@ const HomePage = () => {
   return (
     <div>
       <ProductService />
-      <Outlet /> <Link to="/CartItem">CartItem</Link>
+      <Outlet /> <Link to="/CartPage">CartPage</Link>
       <footer>footer</footer>
     </div>
   );
