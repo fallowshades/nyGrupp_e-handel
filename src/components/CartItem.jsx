@@ -1,20 +1,22 @@
 import React from "react";
 
-function CartItem({ product }) {
-  if (!product) {
-    return <div>Cart is empty!!</div>;
-  }
+function CartItem({ img, imgAlt, title, price }) {
+  // if () {
+  //   return <div>Cart is empty!!</div>;
+  // }
+
+  function TotalPrice() {}
   return (
     <div className="flex items-center space-x-4 p-4 bg-white shadow-md rounded-lg overflow-hidden border border-gray-300">
       <img
-        src={product.img}
-        alt={product.name}
-        className="h-16 w-16 flex-none rounded-full object-cover"
+        src={img}
+        alt={imgAlt}
+        className="h-16 w-16 flex-none rounded-sm object-contain"
       />
 
       <div className="flex-grow">
-        <h5 className="text-lg font-semibold">{product.name}</h5>
-        <p className="text-gray-500">${product.price.toFixed(2)}</p>
+        <h5 className="text-lg font-semibold">{title}</h5>
+        <p className="text-gray-500">${price.toFixed(2)}</p>
       </div>
 
       <input
@@ -24,9 +26,7 @@ function CartItem({ product }) {
         min={1}
       />
 
-      <div className="text-lg font-semibold">
-        Total: ${product.price.toFixed(2)}
-      </div>
+      <div className="text-lg font-semibold">Total: {price.toFixed(2)}</div>
     </div>
   );
 }
