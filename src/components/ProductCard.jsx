@@ -10,7 +10,7 @@ const ProductCard = ({ imgSrc, imgAlt, title, price, onClick, id }) => {
 
   return (
     <div
-      className="border p-4 rounded shadow hover:scale-105 transition-transform hover:shadow-lg"
+      className="border p-4 rounded shadow hover:scale-105 transition-transform hover:shadow-lg hover:cursor-pointer"
       onClick={() => handleRedirect(id)}
     >
       <img

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import SearchItem from "./searchItem";
 
 function Navbar() {
   const [input, setInput] = useState("");
@@ -50,19 +51,13 @@ function Navbar() {
           <ul>
             {filteredProducts.length > 0 ? (
               filteredProducts.map((product) => (
-                <div
-                  className="bg-white flex items-center my-2 p-2 rounded-md"
+                <SearchItem
+                  imgSrc={product.image}
+                  imgAlt={product.title}
+                  title={product.title}
+                  id={product.id}
                   key={product.id}
-                >
-                  <li className="flex items-center w-full justify-between">
-                    <p className="text-lg font-medium">{product.title}</p>
-                    <img
-                      src={product.image}
-                      alt={product.title}
-                      className="w-12 h-12 object-cover rounded-md ml-4"
-                    />
-                  </li>
-                </div>
+                />
               ))
             ) : (
               <p>No products found</p>
