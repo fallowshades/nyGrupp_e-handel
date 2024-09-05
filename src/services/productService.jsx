@@ -11,6 +11,7 @@ const ProductService = () => {
         const data = await fetch("https://fakestoreapi.com/products");
         const response = await data.json();
         setProducts(response);
+        console.log(response);
       } catch (error) {
         console.log("error fetching products", error);
       }

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { addItem } from "../redux/slice/cartSlice";
 const ProductCard = ({ imgSrc, imgAlt, title, price, onClick, id }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
   function handleRedirect(id) {
     navigate(`/productid/${id}`);
   }
