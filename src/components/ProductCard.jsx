@@ -1,8 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const ProductCard = ({ imgSrc, imgAlt, title, price, onClick }) => {
+const ProductCard = ({ imgSrc, imgAlt, title, price, onClick, id }) => {
+  const navigate = useNavigate();
+
+  function handleRedirect(id) {
+    navigate(`/productid/${id}`);
+  }
+
   return (
-    <div className="border p-4 rounded shadow hover:scale-105 transition-transform hover:shadow-lg">
+    <div
+      className="border p-4 rounded shadow hover:scale-105 transition-transform hover:shadow-lg"
+      onClick={() => handleRedirect(id)}
+    >
       <img
         src={imgSrc}
         alt={imgAlt}
