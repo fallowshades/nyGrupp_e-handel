@@ -8,6 +8,7 @@ function Navbar() {
   const [input, setInput] = useState("");
 
   const products = useSelector((state) => state.products.items || []);
+  const cartItems = useSelector((state) => state.cart.cartItems || []);
 
   const filteredProducts = products.filter((product) =>
     product.title.toLowerCase().includes(input.toLowerCase())
@@ -42,6 +43,7 @@ function Navbar() {
         <div>
           <button className="border-white border py-3 px-8 rounded-lg hover:scale-105">
             <FaShoppingCart color="White" size={24} />
+            <span>{cartItems}</span>
           </button>
         </div>
       </div>
