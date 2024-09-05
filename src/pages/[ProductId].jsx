@@ -11,6 +11,7 @@ const ProductId = () => {
 
   return clickedProduct.map((product) => (
     <ProductItem
+      key={product.id}
       imgSrc={product.image}
       imgAlt={product.title}
       title={product.title}
