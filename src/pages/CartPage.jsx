@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 const CartPage = () => {
   const { items } = useSelector((state) => state.products);
 
+  const { cartTotal, orderTotal } = useSelector((state) => state.cart);
   function lol() {}
   return (
     <div>
@@ -20,7 +21,7 @@ const CartPage = () => {
         />
       ))}
 
-      <div className="h-16 w-60">Cart Total: CartTotal</div>
+      <div className="h-16 w-60">Cart Total: {orderTotal}</div>
 
       <button className="h-16 w-60 bg-slate-300 shadow-lg shadow-black">
         Click to checkout

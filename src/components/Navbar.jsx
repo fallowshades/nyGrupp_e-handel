@@ -9,8 +9,7 @@ function Navbar() {
   const [input, setInput] = useState("");
 
   const products = useSelector((state) => state.products.items || []);
-  const cartItems = useSelector((state) => state.cart.cartItems || []);
-
+  const { cartTotal } = useSelector((state) => state.cart || []);
   const filteredProducts = products.filter((product) =>
     product.title.toLowerCase().includes(input.toLowerCase())
   );
@@ -42,9 +41,9 @@ function Navbar() {
           </div>
         </div>
         <div>
-          <button className="border-white border py-3 px-8 rounded-lg hover:scale-105">
+          <button className="border-white border py-3 px-8 rounded-lg hover:scale-105 flex">
             <FaShoppingCart color="White" size={24} />
-            <span>{cartItems}</span>
+            <span className=" pl-2 text-white">{cartTotal}</span>
           </button>
         </div>
       </div>
