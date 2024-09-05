@@ -51,13 +51,14 @@ function Navbar() {
           <ul>
             {filteredProducts.length > 0 ? (
               filteredProducts.map((product) => (
-                <SearchItem
-                  imgSrc={product.image}
-                  imgAlt={product.title}
-                  title={product.title}
-                  id={product.id}
-                  key={product.id}
-                />
+                <li key={product.id}>
+                  <SearchItem
+                    imgSrc={product.image}
+                    imgAlt={product.title}
+                    title={product.title}
+                    id={product.id}
+                  />
+                </li>
               ))
             ) : (
               <p>No products found</p>

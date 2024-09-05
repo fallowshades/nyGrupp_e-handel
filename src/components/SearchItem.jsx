@@ -12,14 +12,14 @@ const SearchItem = ({ imgSrc, imgAlt, title, id }) => {
       className="bg-white flex items-center my-2 p-2 rounded-md hover:cursor-pointer"
       onClick={() => handleRedirect(id)}
     >
-      <li className="flex items-center w-full justify-between">
+      <div className="flex items-center w-full justify-between">
         <p className="text-lg font-medium">{title}</p>
         <img
           src={imgSrc}
           alt={imgAlt}
           className="w-12 h-12 object-cover rounded-md ml-4"
         />
-      </li>
+      </div>
     </div>
   );
 };
