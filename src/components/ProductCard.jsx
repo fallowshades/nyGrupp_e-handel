@@ -10,6 +10,7 @@ const ProductCard = ({ imgSrc, imgAlt, title, price, onClick, id }) => {
   }
 
   const addToCart = () => {
+    const amount = 1;
     const cartProduct = {
       cartID: id,
       productID: id,
@@ -17,6 +18,7 @@ const ProductCard = ({ imgSrc, imgAlt, title, price, onClick, id }) => {
       imgSrc,
       title,
       price,
+      amount: 1,
     };
     dispatch(addItem(cartProduct));
   };
