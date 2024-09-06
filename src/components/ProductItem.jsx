@@ -1,5 +1,6 @@
 import React from "react";
-
+import { useDispatch } from "react-redux";
+import { addItem } from "../redux/slice/cartSlice";
 const ProductItem = ({
   imgSrc,
   imgAlt,
@@ -8,6 +9,20 @@ const ProductItem = ({
   description,
   onClick,
 }) => {
+  const addToCart = () => {
+    const amount = 1;
+    const cartProduct = {
+      cartID: id,
+      productID: id,
+      imgAlt,
+      imgSrc,
+      title,
+      price,
+      amount,
+    };
+    dispatch(addItem(cartProduct));
+  };
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 border-gray-100 p-24 lg:px-80">
       <img src={imgSrc} alt={imgAlt}></img>
@@ -17,7 +32,7 @@ const ProductItem = ({
         <p>{description}</p>
         <button
           className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-          onClick={onClick}
+          onClick={addToCart}
         >
           Add to cart
         </button>
