@@ -37,3 +37,5 @@ const ProductService = () => {
 };
 
 export default ProductService;
+
+/* https://thingproxy.freeboard.io/fetch/ */
