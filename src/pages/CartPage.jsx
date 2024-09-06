@@ -6,7 +6,7 @@ const CartPage = () => {
   const { items } = useSelector((state) => state.products);
 
   const { cartTotal, orderTotal } = useSelector((state) => state.cart);
-  function lol() {}
+  console.log(orderTotal, cartTotal);
   return (
     <div>
       <h2>Your Cart:</h2>
