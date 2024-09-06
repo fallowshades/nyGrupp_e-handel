@@ -4,9 +4,12 @@ import { FaShoppingCart } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import SearchItem from "./searchItem";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [input, setInput] = useState("");
+
+  const navigate = useNavigate();
 
   const products = useSelector((state) => state.products.items || []);
   const { numItemsInCart } = useSelector((state) => state.cart || []);
@@ -18,10 +21,18 @@ function Navbar() {
     setInput(e.target.value);
   }
 
+  function handleCartClick() {
+    navigate("/CartPage");
+  }
+
+  function handleLogoClick() {
+    navigate("/");
+  }
+
   return (
     <nav className=" shadow p-4 bg-gray-800 w-full">
       <div className="mx-auto flex items-center justify-between">
-        <div>
+        <div className="hover:cursor-pointer" onClick={handleLogoClick}>
           <img
             src="logo.png"
             alt="Logo"
@@ -41,7 +52,10 @@ function Navbar() {
           </div>
         </div>
         <div>
-          <button className="border-white border py-3 px-8 rounded-lg hover:scale-105 flex">
+          <button
+            className="border-white border py-3 px-8 rounded-lg hover:scale-105 flex"
+            onClick={handleCartClick}
+          >
             <FaShoppingCart color="White" size={24} />
             <span className=" pl-2 text-white">{numItemsInCart}</span>
           </button>
