@@ -35,6 +35,7 @@ const HomePage = () => {
               imgAlt={product.title}
               title={product.title}
               id={product.id}
+              price={product.price}
             />
           </li>
         ))}
