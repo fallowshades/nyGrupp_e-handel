@@ -2,14 +2,17 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addItem } from "../redux/slice/cartSlice";
-const ProductCard = ({ imgSrc, imgAlt, title, price, onClick, id }) => {
+const ProductCard = ({ imgSrc, imgAlt, title, price, id }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   function handleRedirect(id) {
     navigate(`/productid/${id}`);
   }
 
-  const addToCart = () => {
+  const addToCart = (e) => {
+    e.stopPropagation();
+
     const amount = 1;
     const cartProduct = {
       cartID: id,
