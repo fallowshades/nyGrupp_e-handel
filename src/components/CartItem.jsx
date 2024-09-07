@@ -1,10 +1,17 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { removeItem } from "../redux/slice/cartSlice";
 
-function CartItem({ img, imgAlt, title, price }) {
+function CartItem({ img, imgAlt, title, price, cartID }) {
+  const dispatch = useDispatch();
+
+  function handleRemove(cartID) {
+    dispatch(removeItem(cartID));
+  }
+
   // if () {
   //   return <div>Cart is empty!!</div>;
   // }
-
   return (
     <div className="flex items-center space-x-4 p-4 bg-white shadow-md rounded-lg overflow-hidden border border-gray-300">
       <img
@@ -24,8 +31,15 @@ function CartItem({ img, imgAlt, title, price }) {
         defaultValue={1}
         min={1}
       />
-
-      <div className="text-lg font-semibold">Total: {price.toFixed(2)}</div>
+      <div>
+        <div className="text-lg font-semibold">Total: {price.toFixed(2)}</div>
+        <button
+          onClick={() => handleRemove(cartID)}
+          className="underline text-slate-400"
+        >
+          Remove
+        </button>
+      </div>
     </div>
   );
 }

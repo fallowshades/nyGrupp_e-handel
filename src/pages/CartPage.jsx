@@ -4,10 +4,8 @@ import { useSelector } from "react-redux";
 import { FaArrowRight } from "react-icons/fa";
 
 const CartPage = () => {
-  const { cartItems, cartTotal, orderTotal } = useSelector(
-    (state) => state.cart
-  );
-  console.log(orderTotal, cartTotal);
+  const { cartItems, orderTotal } = useSelector((state) => state.cart);
+  console.log(orderTotal, cartItems);
   console.log(cartItems.map((item) => item.id));
 
   return (
@@ -15,13 +13,14 @@ const CartPage = () => {
       <div className="flex flex-col md:flex-row justify-between gap-8">
         <div className="w-full md:w-[60%] flex flex-col gap-4">
           <h2 className="font-bold text-3xl mb-4">Your Cart:</h2>
-          {cartItems.map((product, index) => (
+          {cartItems.map((product) => (
             <CartItem
-              key={`${product.id}-${index}`}
-              img={product.image}
-              imgAlt={product.title}
+              key={product.cartID}
+              img={product.imgSrc}
+              imgAlt={product.imgAlt}
               title={product.title}
               price={product.price}
+              cartID={product.cartID}
             />
           ))}
         </div>
