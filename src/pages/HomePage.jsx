@@ -23,7 +23,7 @@ const HomePage = () => {
 
         <div className="absolute left-10 flex flex-col text-white text-center pl-10">
           <h3 className="text-3xl p-5">More than what you might expect.</h3>
-          <p className="text-2xl">Fashion, Beauty, Desig and much more!</p>
+          <p className="text-2xl">Fashion, Beauty, Design and much more!</p>
         </div>
       </div>
 

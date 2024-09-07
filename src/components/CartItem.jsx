@@ -5,7 +5,6 @@ function CartItem({ img, imgAlt, title, price }) {
   //   return <div>Cart is empty!!</div>;
   // }
 
-  function TotalPrice() {}
   return (
     <div className="flex items-center space-x-4 p-4 bg-white shadow-md rounded-lg overflow-hidden border border-gray-300">
       <img
@@ -15,7 +14,7 @@ function CartItem({ img, imgAlt, title, price }) {
       />
 
       <div className="flex-grow">
-        <h5 className="text-lg font-semibold">{title}</h5>
+        <h5 className="text-md font-semibold">{title}</h5>
         <p className="text-gray-500">${price.toFixed(2)}</p>
       </div>
 
