@@ -41,7 +41,7 @@ const ProductCard = ({ imgSrc, imgAlt, title, price, id }) => {
         <p className="text-gray-500">{price} SEK</p>
         <button
           onClick={addToCart}
-          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+          className="bg-white hover:bg-gray-100 active:bg-gray-200 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
         >
           Add to cart
         </button>

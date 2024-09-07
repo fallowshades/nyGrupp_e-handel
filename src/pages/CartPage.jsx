@@ -28,7 +28,7 @@ const CartPage = () => {
           <div className="h-16 w-full flex items-center justify-center border border-slate-300 bg-white text-lg font-semibold rounded-lg">
             Cart Total: ${orderTotal.toFixed(2)}
           </div>
-          <button className="h-16 w-full bg-cyan-800 hover:bg-cyan-500 text-white rounded-lg shadow-lg flex justify-center items-center gap-4 hover:scale-105 ease-in-out duration-300">
+          <button className="h-16 w-full bg-cyan-800 hover:bg-cyan-500 active:bg-cyan-400 text-white rounded-lg shadow-lg flex justify-center items-center gap-4 hover:scale-105 ease-in-out duration-200">
             Click to checkout <FaArrowRight />
           </button>
         </div>
