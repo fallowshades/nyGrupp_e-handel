@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { addItem } from "../redux/slice/cartSlice";
 const ProductItem = ({
+  id,
   imgSrc,
   imgAlt,
   title,
@@ -9,6 +10,7 @@ const ProductItem = ({
   description,
   onClick,
 }) => {
+  const dispatch = useDispatch();
   const addToCart = () => {
     const amount = 1;
     const cartProduct = {
