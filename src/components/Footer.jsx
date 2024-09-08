@@ -11,7 +11,7 @@ const Footer = () => {
           </Link>
         </li>
         <li>
-          <Link to="/Product" className="hover:text-gray-300">
+          <Link to="" className="hover:text-gray-300">
             Product
           </Link>
         </li>
@@ -21,13 +21,14 @@ const Footer = () => {
           </Link>
         </li>
         <li>
-          <Link to="/about" className="hover:text-gray-300">
+          <Link to="" className="hover:text-gray-300">
             About Us
           </Link>
         </li>
       </ul>
       <p className="mt-4">
-        &copy; {new Date().getFullYear()} Your Webshop. All rights reserved.
+        &copy; {new Date().getFullYear()} NYA GRUPPEN Webshop. All rights
+        reserved.
       </p>
     </footer>
   );
