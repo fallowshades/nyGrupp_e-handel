@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
@@ -21,8 +20,11 @@ function Navbar() {
     setInput(e.target.value);
   }
 
+  // if cart is empty, dont redirect, eme
   function handleCartClick() {
-    navigate("/CartPage");
+    if (numItemsInCart > 0) {
+      navigate("/CartPage");
+    }
   }
 
   function handleLogoClick() {

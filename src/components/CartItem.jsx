@@ -1,17 +1,24 @@
-import React from "react";
 import { useDispatch } from "react-redux";
-import { removeItem } from "../redux/slice/cartSlice";
+import { removeItem, editItem } from "../redux/slice/cartSlice";
+import { useState } from "react";
 
-function CartItem({ img, imgAlt, title, price, cartID }) {
+function CartItem({ img, imgAlt, title, price, cartID, amount }) {
   const dispatch = useDispatch();
+  const [inputAmount, setInputAmount] = useState(amount);
+  const [totalAfterCalc, setTotalAfterCalc] = useState(price * amount);
 
   function handleRemove(cartID) {
     dispatch(removeItem(cartID));
   }
 
-  // if () {
-  //   return <div>Cart is empty!!</div>;
-  // }
+  function handleAmountChange(e) {
+    const newAmount = Number(e.target.value);
+    setInputAmount(newAmount);
+    setTotalAfterCalc(newAmount * price);
+
+    dispatch(editItem({ cartID, amount: newAmount }));
+  }
+
   return (
     <div className="flex items-center space-x-4 p-4 bg-white shadow-md rounded-lg overflow-hidden border border-gray-300">
       <img
@@ -28,11 +35,14 @@ function CartItem({ img, imgAlt, title, price, cartID }) {
       <input
         type="number"
         className="w-20 p-1 border rounded border-gray-300 text-center"
-        defaultValue={1}
+        value={inputAmount}
         min={1}
+        onChange={handleAmountChange}
       />
       <div>
-        <div className="text-lg font-semibold">Total: {price.toFixed(2)}</div>
+        <div className="text-lg font-semibold">
+          Total: {totalAfterCalc.toFixed(2)}
+        </div>
         <button
           onClick={() => handleRemove(cartID)}
           className="underline text-slate-400"

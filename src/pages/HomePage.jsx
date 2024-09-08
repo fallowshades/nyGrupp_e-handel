@@ -1,5 +1,3 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProductCard from "../components/ProductCard";
 
@@ -40,7 +38,6 @@ const HomePage = () => {
           </li>
         ))}
       </ul>
-      <Outlet />
     </div>
   );
 };
