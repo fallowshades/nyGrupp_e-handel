@@ -55,12 +55,15 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
     }),
   },
 }))
-
+import { useLoginFormValidation } from '@/hooks/useLoginFormValidation'
 export function Register(props: { disableCustomTheme?: boolean }) {
-  const [emailError, setEmailError] = React.useState(false)
-  const [emailErrorMessage, setEmailErrorMessage] = React.useState('')
-  const [passwordError, setPasswordError] = React.useState(false)
-  const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('')
+  const {
+    emailError,
+    emailErrorMessage,
+    passwordError,
+    passwordErrorMessage,
+    validateInputs,
+  } = useLoginFormValidation()
   const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
@@ -78,35 +81,6 @@ export function Register(props: { disableCustomTheme?: boolean }) {
       email: data.get('email'),
       password: data.get('password'),
     })
-  }
-
-  const validateInputs = () => {
-    const email = document.getElementById('email') as HTMLInputElement | null
-    const password = document.getElementById(
-      'password'
-    ) as HTMLInputElement | null
-
-    let isValid = true
-
-    if (!email || !email.value || !/\S+@\S+\.\S+/.test(email.value)) {
-      setEmailError(true)
-      setEmailErrorMessage('Please enter a valid email address.')
-      isValid = false
-    } else {
-      setEmailError(false)
-      setEmailErrorMessage('')
-    }
-
-    if (!password || !password.value || password.value.length < 6) {
-      setPasswordError(true)
-      setPasswordErrorMessage('Password must be at least 6 characters long.')
-      isValid = false
-    } else {
-      setPasswordError(false)
-      setPasswordErrorMessage('')
-    }
-
-    return isValid
   }
 
   return (
