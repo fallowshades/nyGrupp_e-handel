@@ -56,7 +56,7 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
   },
 }))
 
-export function Register(props) {
+export function Register(props: { disableCustomTheme?: boolean }) {
   const [emailError, setEmailError] = React.useState(false)
   const [emailErrorMessage, setEmailErrorMessage] = React.useState('')
   const [passwordError, setPasswordError] = React.useState(false)
@@ -71,7 +71,7 @@ export function Register(props) {
     setOpen(false)
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
     console.log({
