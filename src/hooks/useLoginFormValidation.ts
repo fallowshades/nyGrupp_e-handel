@@ -5,7 +5,7 @@ interface LoginFormValidation {
   emailErrorMessage: string
   passwordError: boolean
   passwordErrorMessage: string
-  validateInputs: () => boolean
+  validateInputs: (email: string, password: string) => boolean
 }
 
 export const useLoginFormValidation = (): LoginFormValidation => {
@@ -15,34 +15,38 @@ export const useLoginFormValidation = (): LoginFormValidation => {
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('')
 
   // Memoize the validateInputs function to avoid unnecessary re-renders
-  const validateInputs = useCallback((): boolean => {
-    const email = document.getElementById('email') as HTMLInputElement | null
-    const password = document.getElementById(
-      'password'
-    ) as HTMLInputElement | null
+  const validateInputs = useCallback(
+    (email: string | null, password: string): boolean => {
+      //   const email = document.getElementById('email') as HTMLInputElement | null
+      //   const password = document.getElementById(
+      //     'password'
+      //   ) as HTMLInputElement | null
 
-    let isValid = true
+      const emailString = email ? String(email) : ''
+      let isValid = true
+      //.value is not needed if not selected element, we useState
+      if (!email || !email || !/\S+@\S+\.\S+/.test(email)) {
+        setEmailError(true)
+        setEmailErrorMessage('Please enter a valid email address.')
+        isValid = false
+      } else {
+        setEmailError(false)
+        setEmailErrorMessage('')
+      }
 
-    if (!email || !email.value || !/\S+@\S+\.\S+/.test(email.value)) {
-      setEmailError(true)
-      setEmailErrorMessage('Please enter a valid email address.')
-      isValid = false
-    } else {
-      setEmailError(false)
-      setEmailErrorMessage('')
-    }
+      if (!password || !password || password.length < 6) {
+        setPasswordError(true)
+        setPasswordErrorMessage('Password must be at least 6 characters long.')
+        isValid = false
+      } else {
+        setPasswordError(false)
+        setPasswordErrorMessage('')
+      }
 
-    if (!password || !password.value || password.value.length < 6) {
-      setPasswordError(true)
-      setPasswordErrorMessage('Password must be at least 6 characters long.')
-      isValid = false
-    } else {
-      setPasswordError(false)
-      setPasswordErrorMessage('')
-    }
-
-    return isValid
-  }, [])
+      return isValid
+    },
+    []
+  )
 
   return {
     emailError,

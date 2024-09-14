@@ -374,3 +374,174 @@ export function Register(props: { disableCustomTheme?: boolean }) {
   } = useLoginFormValidation()
 }
 ```
+
+####
+
+Login.tsx
+
+- a challange upgrading selector code --> useState with redux toolkit typescript.
+- async handler
+- form element handle update logic
+- care formdata may contain a file
+
+```tsx
+import { RootState } from '@/redux/store'
+import { loginUserThunk } from '@/redux/user_extend/userSlice'
+import { useDispatch, useSelector } from 'react-redux'
+export function Login(props: { disableCustomTheme?: boolean }) {
+  const dispatch = useDispatch()
+  const { user, loading, error } = useSelector((state: RootState) => state.user)
+
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        ...
+          const email = data.get('email')
+    const password = data.get('password')
+
+    if (typeof email !== 'string' || typeof password !== 'string') {
+      console.error('Email or password is missing.')
+      return
+    }
+
+    if (!validateInputs(email, password)) {
+      return !email || !password
+    }
+
+    try {
+      await dispatch(loginUserThunk({ email, password }) as any)
+    } catch (err) {
+      console.error('Login failed:', err)
+    }
+  }
+
+    return(
+      ...
+        <Box
+            component='form'
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              width: '100%',
+              gap: 2,
+            }}
+          >
+          ...
+
+           <Button type='submit' fullWidth variant='contained'>
+              {' '}
+              {/**  onClick={validateInputs} */}
+              Sign in
+            </Button>
+            ...
+            </Box>
+    )
+    }
+
+
+```
+
+useLoginFormValidation.ts
+
+- update validation hook consider is not file
+
+```ts
+ interface LoginFormValidation {
+  ...
+  validateInputs: (email: string, password: string) => boolean
+}
+
+
+export const useLoginFormValidation = (): LoginFormValidation => {
+
+  const validateInputs = useCallback(
+    (email: string | null, password: string): boolean => {
+        //   const email = document.getElementById('email') as HTMLInputElement | null
+      //   const password = document.getElementById(
+      //     'password'
+      //   ) as HTMLInputElement | null
+
+      const emailString = email ? String(email) : ''
+      let isValid = true
+      //.value is not needed if not selected element, we useState
+      ...
+    }
+
+  )
+}
+```
+
+main.jsx
+
+- don't use file extention in case js --> ts
+
+```jsx
+import { store } from './redux/store'
+```
+
+store.ts
+
+- needed for typescript
+
+```ts
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+
+export type ReduxStore = {
+  getState: () => RootState
+  dispatch: AppDispatch
+}
+```
+
+userSlice.ts
+
+- loading managed but not yet considered in code
+
+```ts
+// Define the type for the thunk's argument
+interface LoginCredentials {
+  email: string
+  password: string
+}
+
+// Define the type for the response from the API
+interface LoginResponse {
+  email: string
+  password: string
+}
+
+export const loginUserThunk = createAsyncThunk<LoginResponse, LoginCredentials>(
+  'user/loginUserThunk',
+  async ({ email, password }: LoginResponse) => {
+    // Simulate an API call
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+
+    if (email === 'test@example.com' && password === 'password123') {
+      return { name: 'Test User', email, password }
+    } else {
+      throw new Error('Invalid credentials')
+    }
+  }
+)
+
+const userSlice = createSlice({
+...
+ extraReducers: (builder) => {
+    builder
+      .addCase(loginUserThunk.pending, (state) => {
+        state.loading = true
+        state.error = null
+      })
+      .addCase(loginUserThunk.fulfilled, (state, action) => {
+        state.loading = false
+        state.user = action.payload
+        localStorage.setItem('user-thunc', JSON.stringify(action.payload))
+      })
+      .addCase(loginUserThunk.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.error.message || 'Login failed'
+      })
+  },
+})
+```

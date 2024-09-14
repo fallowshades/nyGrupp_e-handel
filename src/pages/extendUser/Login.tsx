@@ -56,7 +56,13 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
   },
 }))
 import { useLoginFormValidation } from '@/hooks/useLoginFormValidation'
-export function Register(props: { disableCustomTheme?: boolean }) {
+
+import { RootState } from '@/redux/store'
+import { loginUserThunk } from '@/redux/user_extend/userSlice'
+import { useDispatch, useSelector } from 'react-redux'
+export function Login(props: { disableCustomTheme?: boolean }) {
+  const dispatch = useDispatch()
+  const { user, loading, error } = useSelector((state: RootState) => state.user)
   const {
     emailError,
     emailErrorMessage,
@@ -74,13 +80,27 @@ export function Register(props: { disableCustomTheme?: boolean }) {
     setOpen(false)
   }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    })
+
+    const email = data.get('email')
+    const password = data.get('password')
+
+    if (typeof email !== 'string' || typeof password !== 'string') {
+      console.error('Email or password is missing.')
+      return
+    }
+
+    if (!validateInputs(email, password)) {
+      return !email || !password
+    }
+
+    try {
+      await dispatch(loginUserThunk({ email, password }) as any)
+    } catch (err) {
+      console.error('Login failed:', err)
+    }
   }
 
   return (
@@ -160,12 +180,9 @@ export function Register(props: { disableCustomTheme?: boolean }) {
               label='Remember me'
             />
             <ForgotPassword open={open} handleClose={handleClose} />
-            <Button
-              type='submit'
-              fullWidth
-              variant='contained'
-              onClick={validateInputs}
-            >
+            <Button type='submit' fullWidth variant='contained'>
+              {' '}
+              {/**  onClick={validateInputs} */}
               Sign in
             </Button>
             <Typography sx={{ textAlign: 'center' }}>
@@ -208,4 +225,4 @@ export function Register(props: { disableCustomTheme?: boolean }) {
   )
 }
 
-export default Register
+export default Login
