@@ -56,3 +56,36 @@ tailwind.config.js
   plugins: [require('daisyui')],
 }
 ```
+
+#### cpy mui template
+
+```sh
+npm install @mui/material @emotion/react @emotion/styled
+npm install @fontsource/roboto
+npm install @mui/icons-material
+```
+
+index.html
+
+- usage proper render on touch zooming
+
+```html
+<meta name="viewport" content="initial-scale=1, width=device-width" />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+/>
+```
+
+main.js
+
+```js
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
+```
+
+[register-login]https://github.com/mui/material-ui/tree/v6.1.0/docs/data/material/getting-started/templates
+
+- not fun to cpy

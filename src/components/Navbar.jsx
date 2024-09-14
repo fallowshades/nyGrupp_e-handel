@@ -96,13 +96,13 @@ function Navbar() {
         ) : (
           <div className='flex gap-x-6 justify-center items-center'>
             <Link
-              to='/login-interior'
+              to='/login'
               className='link link-hover text-xs sm:text-sm text-white'
             >
               Sign in / Guest
             </Link>
             <Link
-              to='/register-interior'
+              to='/register'
               className='link link-hover text-xs sm:text-sm text-white'
             >
               Create an Account
