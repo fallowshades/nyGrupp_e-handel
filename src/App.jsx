@@ -1,36 +1,42 @@
-import { CartPage, HomePage, ProductId } from "./pages";
-import Layout from "./components/layout/Layout";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { fetchProducts } from "./redux/slice/productSlice";
+import { CartPage, HomePage, ProductId } from './pages'
+import Layout from './components/layout/Layout'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { fetchProducts } from './redux/slice/productSlice'
 
+import { Login, Register } from './pages'
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Layout />,
 
     children: [
       { index: true, element: <HomePage /> },
       {
-        path: "CartPage",
+        path: 'login',
+        element: <Login />,
+      },
+      { path: 'register', element: <Register /> },
+      {
+        path: 'CartPage',
         element: <CartPage />,
       },
       {
-        path: "ProductId/:id",
+        path: 'ProductId/:id',
         element: <ProductId />,
       },
     ],
   },
-]);
+])
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
-  return <RouterProvider router={router} />;
+    dispatch(fetchProducts())
+  }, [dispatch])
+  return <RouterProvider router={router} />
 }
 
-export default App;
+export default App
