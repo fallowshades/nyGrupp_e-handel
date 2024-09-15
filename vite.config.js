@@ -4,6 +4,12 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  build: {
+    sourcemap: true, // enable production source maps
+  },
+  css: {
+    devSourcemap: true, // enable CSS source maps during development
+  },
   plugins: [react()],
   resolve: {
     alias: {

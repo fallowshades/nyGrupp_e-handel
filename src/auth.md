@@ -1,8 +1,10 @@
 #
 
-##
+## navbar and 2 pages --> rerender || redirect
 
-### before set up storage between navigation
+- 1. redux toolkit actions and reducers
+
+### before set up storage (between navigation)
 
 #### did before for absolute path imports instead of relative path
 
@@ -25,13 +27,15 @@ export default defineConfig({
 })
 ```
 
-#### access global store state
+#### access global store state (ternary operator + pages)
 
 ```App.jsx
 
 ```
 
 Navbar.jsx
+
+- toggle between two state. render with ternary operator
 
 ```jsx
 const { user } = useSelector((state) => state.user)
@@ -63,6 +67,8 @@ return (
 )
 ```
 
+- 2 pages and a store
+
 ```Login.jsx, Register.jsx
 rafce
 ```
@@ -73,12 +79,14 @@ userSlice.js
 
 tailwind.config.js
 
+- convenience
+
 ```JS
   plugins: [require('daisyui')],
 }
 ```
 
-#### cpy mui template
+#### cpy mui template (meta + links)
 
 ```sh
 npm install @mui/material @emotion/react @emotion/styled
@@ -111,9 +119,11 @@ import '@fontsource/roboto/700.css'
 
 - not fun to cpy
 
-### optimize
+### optimize (test component library template)
 
-#### try refracture theme and formValidation
+- 2. redux store and selectors, hook is not centeralized store (unless context)
+
+#### try refracture theme and formValidation (decleration file + loading + reducer + theme/validation hook(selectors...))
 
 - uh some typescript v0.8.3 inspired
 
@@ -298,7 +308,13 @@ export const useFormValidation = () => {
 }
 ```
 
-#### refracture in login also
+-
+
+###
+
+- 5. JSON hantering
+
+#### refracture in login also (unique hook seperate does)
 
 useLoginFormValidation.ts
 
@@ -375,13 +391,18 @@ export function Register(props: { disableCustomTheme?: boolean }) {
 }
 ```
 
+## network aware + \* returns
+
 ### formdata and where access from. network aware
 
-#### action most basic event value to formdata
+- 4. event managment (require setup)
+
+#### action most basic event value to formdata (prevent form Action, w async handler, args --> connect slice and reducer)
 
 Login.tsx
 
 - a challange upgrading selector code --> useState with redux toolkit typescript.
+- import type and push payload from stateManagment
 - async handler
 - form element handle update logic
 - care formdata may contain a file
@@ -548,7 +569,11 @@ const userSlice = createSlice({
 })
 ```
 
-#### refracture and attempt to avoid flicker
+### what store reducer || extra Reducer
+
+- 3. async thunc
+
+#### refracture and attempt to avoid flicker (need fetch api, misstake local reducer, + exist alternative store managers)
 
 []https://auth0.com/docs/libraries/auth0-single-page-app-sdk#installation
 [react] https://auth0.com/docs/quickstart/spa/react/interactive
@@ -686,7 +711,13 @@ export const {getCurrentLocalUser, setLoading } =
   userSlice.actions
 ```
 
-#### axios and session
+## not lazy
+
+###
+
+- 5.Fetch API
+
+#### axios and session (baseURL + folder, 2 [], async ->extra reducer)
 
 - [API DOCS](https://documenter.getpostman.com/view/18152321/2s9Xy5KpTi)
 - [axios] https://www.npmjs.com/package/axios
