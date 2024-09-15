@@ -2,9 +2,7 @@
 
 ##
 
-### before
-
-###
+### before set up storage between navigation
 
 #### did before for absolute path imports instead of relative path
 
@@ -112,6 +110,8 @@ import '@fontsource/roboto/700.css'
 [register-login]https://github.com/mui/material-ui/tree/v6.1.0/docs/data/material/getting-started/templates
 
 - not fun to cpy
+
+### optimize
 
 #### try refracture theme and formValidation
 
@@ -374,6 +374,8 @@ export function Register(props: { disableCustomTheme?: boolean }) {
   } = useLoginFormValidation()
 }
 ```
+
+### formdata and where access from. network aware
 
 #### action most basic event value to formdata
 
@@ -682,4 +684,124 @@ const userSlice = createSlice({
 
 export const {getCurrentLocalUser, setLoading } =
   userSlice.actions
+```
+
+#### axios and session
+
+- [API DOCS](https://documenter.getpostman.com/view/18152321/2s9Xy5KpTi)
+- [axios] https://www.npmjs.com/package/axios
+
+```sh
+npm install axios
+```
+
+corsFetch.tsx
+
+```tsx
+import axios from 'axios'
+const productionUrl = 'https://strapi-store-server.onrender.com/api/'
+
+export const convenientFetch = axios.create({
+  baseURL: productionUrl,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
+```
+
+Navbar.jsx
+
+```jsx
+import { clearCart } from '../redux/slice/cartSlice'
+import { logoutUser } from '../redux/user_extend/userSlice'
+import { useDispatch } from 'react-redux'
+function Navbar() {
+
+  const dispatch = useDispatch()
+  const handleLogout = () => {
+    dispatch(clearCart())
+    dispatch(logoutUser())
+    navigate('/')
+  }
+}
+
+return(
+   {user ? (
+          <div className='flex gap-x-2 sm:gap-x-8 items-center'>
+
+            <p className='text-xs sm:text-sm text-white'>
+              Hello, {user.user?.username}
+            </p>
+            <button
+              className='btn btn-xs btn-outline btn-primary '
+              onClick={handleLogout}
+            >
+              logout
+            </button>
+          </div>
+   ):(...)}
+)
+```
+
+Login.jsx
+
+```jsx
+import { loginPrivilagedUser } from '@/redux/user_extend/userSlice'
+
+  await dispatch(loginPrivilagedUser({ email, password }) as any)
+            placeholder='james@gmail.com'
+              placeholder='secret••••••'
+```
+
+userSlice.ts
+
+```ts
+const getUserFromLocalStorage = () => {
+...
+  return user
+    ? JSON.parse(user)
+    : {
+        user: {
+          username: null,
+          id: null,
+          email: null,
+          provider: null,
+          confirmed: null,
+        },
+        jwt: null,
+        token: null,
+      }
+
+      reducers: {
+    loginUser: (state, action) => {
+      const user = action.payload
+      const user = {
+        ...(action.payload.user as any),
+        token: action.payload.jwt,
+      }
+      state.user = user
+      state.token = action.payload.jwt
+
+      localStorage.setItem('user-thunc', JSON.stringify(user))
+    },
+}
+```
+
+userThunk.ts
+
+```ts
+import { convenientFetch } from '@/utils/corsFetch'
+
+export const loginUserThunk = async (
+  path: String,
+  user: LoginCredentials,
+  thunkAPI: any
+) => {
+  const url = '/auth/local'
+  //https://documenter.getpostman.com/view/18152321/2s9Xy5KpTi#f3a5bd12-8888-40cc-b1af-ed1761395b94
+  const response = await convenientFetch.post(url, data)
+
+  thunkAPI.dispatch(loginUser(response.data))
+  return response.data
+}
 ```

@@ -2,7 +2,33 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 const getUserFromLocalStorage = () => {
   const user = localStorage.getItem('user-thunc')
-  return user ? JSON.parse(user) : { loading: true, user: null, error: null }
+  return user
+    ? JSON.parse(user)
+    : {
+        user: {
+          username: null,
+          id: null,
+          email: null,
+          provider: null,
+          confirmed: null,
+        },
+        jwt: null,
+        token: null,
+      }
+}
+
+export type User = {
+  user: {
+    id: number
+    username: string
+    email: string
+    provider: string
+    confirmed: boolean
+    createdAt?: string
+    updatedAt?: string
+  }
+  jwt: string
+  token?: string
 }
 
 // Define the type for the thunk's argument
@@ -43,8 +69,14 @@ const userSlice = createSlice({
   initialState: getUserFromLocalStorage(),
   reducers: {
     loginUser: (state, action) => {
-      const user = action.payload
+      //const user = action.payload
+      const user = {
+        ...(action.payload.user as any),
+        token: action.payload.jwt,
+      }
       state.user = user
+      state.token = action.payload.jwt
+
       localStorage.setItem('user-thunc', JSON.stringify(user))
     },
     logoutUser: (state) => {

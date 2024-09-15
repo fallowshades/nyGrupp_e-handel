@@ -6,16 +6,25 @@ import SearchItem from './searchItem'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
+import { clearCart } from '../redux/slice/cartSlice'
+import { logoutUser } from '../redux/user_extend/userSlice'
+import { useDispatch } from 'react-redux'
 function Navbar() {
   const [input, setInput] = useState('')
   const { user } = useSelector((state) => state.user)
   const navigate = useNavigate()
-
+  console.log(user)
   const products = useSelector((state) => state.products.items || [])
   const { numItemsInCart } = useSelector((state) => state.cart || [])
   const filteredProducts = products.filter((product) =>
     product.title.toLowerCase().includes(input.toLowerCase())
   )
+  const dispatch = useDispatch()
+  const handleLogout = () => {
+    dispatch(clearCart())
+    dispatch(logoutUser())
+    navigate('/')
+  }
 
   function handleSearch(e) {
     setInput(e.target.value)
@@ -88,8 +97,13 @@ function Navbar() {
       <div className='align-element flex justify-center  '>
         {user ? (
           <div className='flex gap-x-2 sm:gap-x-8 items-center'>
-            <p className='text-xs sm:text-sm'>Hello, user</p>
-            <button className='btn btn-xs btn-outline btn-primary '>
+            <p className='text-xs sm:text-sm text-white'>
+              Hello, {user.user?.username}
+            </p>
+            <button
+              className='btn btn-xs btn-outline btn-primary '
+              onClick={handleLogout}
+            >
               logout
             </button>
           </div>

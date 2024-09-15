@@ -60,6 +60,7 @@ import { useLoginFormValidation } from '@/hooks/useLoginFormValidation'
 import { RootState } from '@/redux/store'
 import { loginUser } from '@/redux/user_extend/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import { loginPrivilagedUser } from '@/redux/user_extend/userSlice'
 export function Login(props: { disableCustomTheme?: boolean }) {
   const dispatch = useDispatch()
   const { user, loading, error } = useSelector((state: RootState) => state.user)
@@ -97,7 +98,7 @@ export function Login(props: { disableCustomTheme?: boolean }) {
     }
 
     try {
-      await dispatch(loginUser({ email, password }) as any)
+      await dispatch(loginPrivilagedUser({ email, password }) as any)
     } catch (err) {
       console.error('Login failed:', err)
     }
@@ -138,7 +139,7 @@ export function Login(props: { disableCustomTheme?: boolean }) {
                 id='email'
                 type='email'
                 name='email'
-                placeholder='your@email.com'
+                placeholder='james@gmail.com'
                 autoComplete='email'
                 autoFocus
                 required
@@ -164,7 +165,7 @@ export function Login(props: { disableCustomTheme?: boolean }) {
                 error={passwordError}
                 helperText={passwordErrorMessage}
                 name='password'
-                placeholder='••••••'
+                placeholder='secret••••••'
                 type='password'
                 id='password'
                 autoComplete='current-password'
