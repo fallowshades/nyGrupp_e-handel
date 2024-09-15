@@ -2,14 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 const getUserFromLocalStorage = () => {
   const user = localStorage.getItem('user-thunc')
-  if (!user)
-    return {
-      loading: false,
-      name: null,
-      email: '',
-      password: 'null',
-    }
-  return JSON.parse(user)
+  return user ? JSON.parse(user) : { loading: true, user: null, error: null }
 }
 
 // Define the type for the thunk's argument
@@ -24,17 +17,24 @@ interface LoginResponse {
   password: string
 }
 
-export const loginUserThunk = createAsyncThunk<LoginResponse, LoginCredentials>(
-  'user/loginUserThunk',
-  async ({ email, password }: LoginResponse) => {
-    // Simulate an API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+import { loginUserThunk } from './userThunk'
 
-    if (email === 'test@example.com' && password === 'password123') {
-      return { name: 'Test User', email, password }
-    } else {
-      throw new Error('Invalid credentials')
+export const loginPrivilagedUser = createAsyncThunk<
+  LoginResponse,
+  LoginCredentials
+>('user/loginUserThunk', async (user, thunkAPI) => {
+  const response = await loginUserThunk('/auth/login', user, thunkAPI)
+  return response
+})
+
+export const getCurrentUser = createAsyncThunk(
+  'user/getCurrentUser',
+  async () => {
+    const user = localStorage.getItem('user-thunc')
+    if (user) {
+      return JSON.parse(user) // Return the user from local storage
     }
+    return null // No user found in local storage
   }
 )
 
@@ -51,24 +51,39 @@ const userSlice = createSlice({
       state.user = null
       localStorage.removeItem('user-thunc')
     },
+    getCurrentLocalUser: (state) => {
+      const user = localStorage.getItem('user-thunc')
+      if (user) {
+        state.user = JSON.parse(user) // Set the user from localStorage if available
+      }
+      state.loading = false
+    },
+    setLoading: (state, action) => {
+      state.loading = action.payload // Set loading state
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(loginUserThunk.pending, (state) => {
+      .addCase(loginPrivilagedUser.pending, (state) => {
         state.loading = true
         state.error = null
       })
-      .addCase(loginUserThunk.fulfilled, (state, action) => {
+      .addCase(loginPrivilagedUser.fulfilled, (state, action) => {
         state.loading = false
         state.user = action.payload
         localStorage.setItem('user-thunc', JSON.stringify(action.payload))
       })
-      .addCase(loginUserThunk.rejected, (state, action) => {
+      .addCase(loginPrivilagedUser.rejected, (state, action) => {
         state.loading = false
         state.error = action.error.message || 'Login failed'
+      })
+      ///
+      .addCase(getCurrentUser.fulfilled, (state, action) => {
+        state.user = action.payload // Set the user from localStorage if available
       })
   },
 })
 
-export const { loginUser, logoutUser } = userSlice.actions
+export const { loginUser, logoutUser, getCurrentLocalUser, setLoading } =
+  userSlice.actions
 export default userSlice.reducer

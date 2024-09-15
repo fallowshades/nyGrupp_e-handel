@@ -375,7 +375,7 @@ export function Register(props: { disableCustomTheme?: boolean }) {
 }
 ```
 
-####
+#### action most basic event value to formdata
 
 Login.tsx
 
@@ -516,7 +516,7 @@ export const loginUserThunk = createAsyncThunk<LoginResponse, LoginCredentials>(
   async ({ email, password }: LoginResponse) => {
     // Simulate an API call
     await new Promise((resolve) => setTimeout(resolve, 1000))
-
+ return { name: 'Test User', email, password }
     if (email === 'test@example.com' && password === 'password123') {
       return { name: 'Test User', email, password }
     } else {
@@ -544,4 +544,142 @@ const userSlice = createSlice({
       })
   },
 })
+```
+
+#### refracture and attempt to avoid flicker
+
+[]https://auth0.com/docs/libraries/auth0-single-page-app-sdk#installation
+[react] https://auth0.com/docs/quickstart/spa/react/interactive
+
+```sh
+npm install @auth0/auth0-spa-js
+```
+
+- can use pre built provider, not gonna
+
+auth0Client.ts
+
+```ts
+import { createAuth0Client, Auth0Client } from '@auth0/auth0-spa-js'
+
+let auth0Client: Auth0Client | null = null
+
+export const initializeAuth0Client = async () => {
+  if (!auth0Client) {
+    auth0Client = await createAuth0Client({
+      domain: 'your-domain',
+      clientId: 'your-clientId',
+    })
+  }
+  return auth0Client
+}
+```
+
+Layout.jsx
+
+- failed attempt, annoying having data access and rendering together
+
+```jsx
+import { Outlet } from 'react-router-dom'
+import Header from '../Header'
+import Footer from '../Footer'
+import { useEffect, useLayoutEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getCurrentLocalUser, setLoading } from '@/redux/user_extend/userSlice'
+
+const Layout = () => {
+  const dispatch = useDispatch()
+  const { loading } = useSelector((state) => state.user)
+  const mounted = useRef(false)
+  useLayoutEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true
+      return
+    }
+    dispatch(setLoading(true))
+    dispatch(getCurrentLocalUser())
+  }, [])
+
+  if (loading || !mounted) {
+    // Render a loading spinner or fallback UI while checking user status (avoid flicker)
+    return <div>Loading...</div>
+  }
+return(...)
+}
+```
+
+Login.tsx
+
+```tsx
+import { loginUser } from '@/redux/user_extend/userSlice'
+
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+   ...
+
+    try {
+      await dispatch(loginUser({ email, password }) as any)
+    } catch (err) {
+      console.error('Login failed:', err)
+    }
+  }
+```
+
+userSlice.ts
+
+```ts
+const getUserFromLocalStorage = () => {
+  const user = localStorage.getItem('user-thunc')
+
+  return user ? JSON.parse(user) : { loading: true, user: null, error: null }
+}
+
+import { loginUserThunk } from './userThunk'
+
+export const loginPrivilagedUser = createAsyncThunk<
+  LoginResponse,
+  LoginCredentials
+>('user/loginUserThunk', async (user, thunkAPI) => {
+  const response = await loginUserThunk('/auth/login', user, thunkAPI)
+  return response
+})
+
+export const getCurrentUser = createAsyncThunk(
+  'user/getCurrentUser',
+  async () => {
+    const user = localStorage.getItem('user-thunc')
+    if (user) {
+      return JSON.parse(user) // Return the user from local storage
+    }
+    return null // No user found in local storage
+  }
+)
+
+const userSlice = createSlice({
+  ...
+  reducer:{
+      getCurrentLocalUser: (state) => {
+      const user = localStorage.getItem('user-thunc')
+      if (user) {
+        state.user = JSON.parse(user) // Set the user from localStorage if available
+      }
+      state.loading = false
+    },
+    setLoading: (state, action) => {
+      state.loading = action.payload // Set loading state
+    },
+  }
+
+
+   extraReducers: (builder) => {
+    builder.addCase(loginPrivilagedUser.---, (state) => {---}
+      .addCase(getCurrentUser.fulfilled, (state, action) => {
+        state.user = action.payload // Set the user from localStorage if available
+      })
+   }
+})
+
+export const {getCurrentLocalUser, setLoading } =
+  userSlice.actions
 ```

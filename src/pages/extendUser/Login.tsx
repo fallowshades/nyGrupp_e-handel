@@ -58,7 +58,7 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 import { useLoginFormValidation } from '@/hooks/useLoginFormValidation'
 
 import { RootState } from '@/redux/store'
-import { loginUserThunk } from '@/redux/user_extend/userSlice'
+import { loginUser } from '@/redux/user_extend/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 export function Login(props: { disableCustomTheme?: boolean }) {
   const dispatch = useDispatch()
@@ -97,7 +97,7 @@ export function Login(props: { disableCustomTheme?: boolean }) {
     }
 
     try {
-      await dispatch(loginUserThunk({ email, password }) as any)
+      await dispatch(loginUser({ email, password }) as any)
     } catch (err) {
       console.error('Login failed:', err)
     }
