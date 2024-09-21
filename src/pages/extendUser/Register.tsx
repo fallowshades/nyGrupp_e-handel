@@ -1,65 +1,66 @@
-import * as React from 'react'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Checkbox from '@mui/material/Checkbox'
-import CssBaseline from '@mui/material/CssBaseline'
-import Divider from '@mui/material/Divider'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import FormLabel from '@mui/material/FormLabel'
-import FormControl from '@mui/material/FormControl'
-import Link from '@mui/material/Link'
-import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
-import Stack from '@mui/material/Stack'
-import MuiCard from '@mui/material/Card'
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import CssBaseline from "@mui/material/CssBaseline";
+import Divider from "@mui/material/Divider";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
+import FormControl from "@mui/material/FormControl";
+import Link from "@mui/material/Link";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import MuiCard from "@mui/material/Card";
 import {
   createTheme,
   ThemeProvider,
   styled,
   PaletteMode,
-} from '@mui/material/styles'
-import getSignUpTheme from './mui/theme/getSignUpTheme'
-import { GoogleIcon, FacebookIcon, SitemarkIcon } from './mui/CustomIcons'
-import TemplateFrame from './mui/TemplateFrame'
-import { useThemeMode } from '@/hooks/useThemeMode'
-import { useFormValidation } from '@/hooks/useFormValidation'
+} from "@mui/material/styles";
+import MetaTags from "@/seo/MetaTags";
+import getSignUpTheme from "./mui/theme/getSignUpTheme";
+import { GoogleIcon, FacebookIcon, SitemarkIcon } from "./mui/CustomIcons";
+import TemplateFrame from "./mui/TemplateFrame";
+import { useThemeMode } from "@/hooks/useThemeMode";
+import { useFormValidation } from "@/hooks/useFormValidation";
 const Card = styled(MuiCard)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  alignSelf: 'center',
-  width: '100%',
+  display: "flex",
+  flexDirection: "column",
+  alignSelf: "center",
+  width: "100%",
   padding: theme.spacing(4),
   gap: theme.spacing(2),
-  margin: 'auto',
+  margin: "auto",
   boxShadow:
-    'hsla(220, 30%, 5%, 0.05) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px',
-  [theme.breakpoints.up('sm')]: {
-    width: '450px',
+    "hsla(220, 30%, 5%, 0.05) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px",
+  [theme.breakpoints.up("sm")]: {
+    width: "450px",
   },
-  ...theme.applyStyles('dark', {
+  ...theme.applyStyles("dark", {
     boxShadow:
-      'hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.08) 0px 15px 35px -5px',
+      "hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.08) 0px 15px 35px -5px",
   }),
-}))
+}));
 
 const SignUpContainer = styled(Stack)(({ theme }) => ({
-  height: '100%',
+  height: "100%",
   padding: 4,
   backgroundImage:
-    'radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 97%), hsl(0, 0%, 100%))',
-  backgroundRepeat: 'no-repeat',
-  ...theme.applyStyles('dark', {
+    "radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 97%), hsl(0, 0%, 100%))",
+  backgroundRepeat: "no-repeat",
+  ...theme.applyStyles("dark", {
     backgroundImage:
-      'radial-gradient(at 50% 50%, hsla(210, 100%, 16%, 0.5), hsl(220, 30%, 5%))',
+      "radial-gradient(at 50% 50%, hsla(210, 100%, 16%, 0.5), hsl(220, 30%, 5%))",
   }),
-}))
+}));
 
 export default function SignUp() {
-  const { mode, toggleColorMode } = useThemeMode() //refracture hook
+  const { mode, toggleColorMode } = useThemeMode(); //refracture hook
   ///
-  const [showCustomTheme, setShowCustomTheme] = React.useState(true)
-  const defaultTheme = createTheme({ palette: { mode } })
-  const SignUpTheme = createTheme(getSignUpTheme(mode))
+  const [showCustomTheme, setShowCustomTheme] = React.useState(true);
+  const defaultTheme = createTheme({ palette: { mode } });
+  const SignUpTheme = createTheme(getSignUpTheme(mode));
 
   //
   const {
@@ -70,22 +71,22 @@ export default function SignUp() {
     nameError,
     nameErrorMessage,
     validateInputs,
-  } = useFormValidation()
+  } = useFormValidation();
 
   const toggleCustomTheme = () => {
-    setShowCustomTheme((prev) => !prev)
-  }
+    setShowCustomTheme((prev) => !prev);
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const data = new FormData(event.currentTarget)
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
     console.log({
-      name: data.get('name'),
-      lastName: data.get('lastName'),
-      email: data.get('email'),
-      password: data.get('password'),
-    })
-  }
+      name: data.get("name"),
+      lastName: data.get("lastName"),
+      email: data.get("email"),
+      password: data.get("password"),
+    });
+  };
 
   return (
     <TemplateFrame
@@ -95,78 +96,85 @@ export default function SignUp() {
       toggleColorMode={toggleColorMode}
     >
       <ThemeProvider theme={showCustomTheme ? SignUpTheme : defaultTheme}>
+        <MetaTags
+          type="advanced"
+          title="og:registrering - Start page"
+          description="Välkommen att skapa konto."
+          url="http://localhost:5176/register" // Provide the full URL for Open Graph
+          canonicalUrl="http://localhost:5176/register" // Full URL for canonical
+        />
         <CssBaseline enableColorScheme />
 
-        <SignUpContainer direction='column' justifyContent='space-between'>
+        <SignUpContainer direction="column" justifyContent="space-between">
           <Stack
             sx={{
-              justifyContent: 'center',
-              height: '100dvh',
+              justifyContent: "center",
+              height: "100dvh",
               p: 2,
             }}
           >
-            <Card variant='outlined'>
+            <Card variant="outlined">
               <SitemarkIcon />
               <Typography
-                component='h1'
-                variant='h4'
-                sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
+                component="h1"
+                variant="h4"
+                sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
               >
                 Sign up
               </Typography>
               <Box
-                component='form'
+                component="form"
                 onSubmit={handleSubmit}
-                sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
+                sx={{ display: "flex", flexDirection: "column", gap: 2 }}
               >
                 {
                   // #region Form Fields
                   true && (
                     <>
-                      ({' '}
+                      ({" "}
                       <FormControl>
-                        <FormLabel htmlFor='name'>Full name</FormLabel>
+                        <FormLabel htmlFor="name">Full name</FormLabel>
                         <TextField
-                          autoComplete='name'
-                          name='name'
+                          autoComplete="name"
+                          name="name"
                           required
                           fullWidth
-                          id='name'
-                          placeholder='Jon Snow'
+                          id="name"
+                          placeholder="Jon Snow"
                           error={nameError}
                           helperText={nameErrorMessage}
-                          color={nameError ? 'error' : 'primary'}
+                          color={nameError ? "error" : "primary"}
                         />
                       </FormControl>
                       <FormControl>
-                        <FormLabel htmlFor='email'>Email</FormLabel>
+                        <FormLabel htmlFor="email">Email</FormLabel>
                         <TextField
                           required
                           fullWidth
-                          id='email'
-                          placeholder='your@email.com'
-                          name='email'
-                          autoComplete='email'
-                          variant='outlined'
+                          id="email"
+                          placeholder="your@email.com"
+                          name="email"
+                          autoComplete="email"
+                          variant="outlined"
                           error={emailError}
                           helperText={emailErrorMessage}
-                          color={passwordError ? 'error' : 'primary'}
+                          color={passwordError ? "error" : "primary"}
                         />
                       </FormControl>
                       <FormControl>
-                        <FormLabel htmlFor='password'>Password</FormLabel>
+                        <FormLabel htmlFor="password">Password</FormLabel>
                         <TextField
                           required
                           fullWidth
-                          name='password'
-                          placeholder='••••••'
-                          type='password'
-                          id='password'
-                          autoComplete='new-password'
-                          variant='outlined'
+                          name="password"
+                          placeholder="••••••"
+                          type="password"
+                          id="password"
+                          autoComplete="new-password"
+                          variant="outlined"
                           error={passwordError}
                           helperText={passwordErrorMessage}
-                          color={passwordError ? 'error' : 'primary'}
+                          color={passwordError ? "error" : "primary"}
                         />
                       </FormControl>
                       )
@@ -176,25 +184,25 @@ export default function SignUp() {
                 }
                 <FormControlLabel
                   control={
-                    <Checkbox value='allowExtraEmails' color='primary' />
+                    <Checkbox value="allowExtraEmails" color="primary" />
                   }
-                  label='I want to receive updates via email.'
+                  label="I want to receive updates via email."
                 />
                 <Button
-                  type='submit'
+                  type="submit"
                   fullWidth
-                  variant='contained'
+                  variant="contained"
                   onClick={validateInputs}
                 >
                   Sign up
                 </Button>
-                <Typography sx={{ textAlign: 'center' }}>
-                  Already have an account?{' '}
+                <Typography sx={{ textAlign: "center" }}>
+                  Already have an account?{" "}
                   <span>
                     <Link
-                      href='/material-ui/getting-started/templates/sign-in/'
-                      variant='body2'
-                      sx={{ alignSelf: 'center' }}
+                      href="/material-ui/getting-started/templates/sign-in/"
+                      variant="body2"
+                      sx={{ alignSelf: "center" }}
                     >
                       Sign in
                     </Link>
@@ -202,23 +210,23 @@ export default function SignUp() {
                 </Typography>
               </Box>
               <Divider>
-                <Typography sx={{ color: 'text.secondary' }}>or</Typography>
+                <Typography sx={{ color: "text.secondary" }}>or</Typography>
               </Divider>
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
                 <Button
-                  type='submit'
+                  type="submit"
                   fullWidth
-                  variant='outlined'
-                  onClick={() => alert('Sign up with Google')}
+                  variant="outlined"
+                  onClick={() => alert("Sign up with Google")}
                   startIcon={<GoogleIcon />}
                 >
                   Sign up with Google
                 </Button>
                 <Button
-                  type='submit'
+                  type="submit"
                   fullWidth
-                  variant='outlined'
-                  onClick={() => alert('Sign up with Facebook')}
+                  variant="outlined"
+                  onClick={() => alert("Sign up with Facebook")}
                   startIcon={<FacebookIcon />}
                 >
                   Sign up with Facebook
@@ -229,5 +237,5 @@ export default function SignUp() {
         </SignUpContainer>
       </ThemeProvider>
     </TemplateFrame>
-  )
+  );
 }

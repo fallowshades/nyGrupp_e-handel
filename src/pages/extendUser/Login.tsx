@@ -1,162 +1,171 @@
-import * as React from 'react'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Checkbox from '@mui/material/Checkbox'
-import CssBaseline from '@mui/material/CssBaseline'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Divider from '@mui/material/Divider'
-import FormLabel from '@mui/material/FormLabel'
-import FormControl from '@mui/material/FormControl'
-import Link from '@mui/material/Link'
-import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
-import Stack from '@mui/material/Stack'
-import MuiCard from '@mui/material/Card'
-import { styled } from '@mui/material/styles'
-import ForgotPassword from './mui/ForgotPassword'
-import { GoogleIcon, FacebookIcon, SitemarkIcon } from './mui/CustomIcons'
-import AppTheme from './mui/shared-theme/AppTheme'
-import ColorModeSelect from './mui/shared-theme/ColorModeSelect'
-
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import CssBaseline from "@mui/material/CssBaseline";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Divider from "@mui/material/Divider";
+import FormLabel from "@mui/material/FormLabel";
+import FormControl from "@mui/material/FormControl";
+import Link from "@mui/material/Link";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import MuiCard from "@mui/material/Card";
+import { styled } from "@mui/material/styles";
+import ForgotPassword from "./mui/ForgotPassword";
+import { GoogleIcon, FacebookIcon, SitemarkIcon } from "./mui/CustomIcons";
+import AppTheme from "./mui/shared-theme/AppTheme";
+import ColorModeSelect from "./mui/shared-theme/ColorModeSelect";
+import MetaTags from "@/seo/MetaTags";
 const Card = styled(MuiCard)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  alignSelf: 'center',
-  width: '100%',
+  display: "flex",
+  flexDirection: "column",
+  alignSelf: "center",
+  width: "100%",
   padding: theme.spacing(4),
   gap: theme.spacing(2),
-  margin: 'auto',
-  [theme.breakpoints.up('sm')]: {
-    maxWidth: '450px',
+  margin: "auto",
+  [theme.breakpoints.up("sm")]: {
+    maxWidth: "450px",
   },
   boxShadow:
-    'hsla(220, 30%, 5%, 0.05) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px',
-  ...theme.applyStyles('dark', {
+    "hsla(220, 30%, 5%, 0.05) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px",
+  ...theme.applyStyles("dark", {
     boxShadow:
-      'hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.08) 0px 15px 35px -5px',
+      "hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.08) 0px 15px 35px -5px",
   }),
-}))
+}));
 
 const SignInContainer = styled(Stack)(({ theme }) => ({
   padding: 20,
-  marginTop: '10vh',
-  '&::before': {
+  marginTop: "10vh",
+  "&::before": {
     content: '""',
-    display: 'block',
-    position: 'absolute',
+    display: "block",
+    position: "absolute",
     zIndex: -1,
     inset: 0,
     backgroundImage:
-      'radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 97%), hsl(0, 0%, 100%))',
-    backgroundRepeat: 'no-repeat',
-    ...theme.applyStyles('dark', {
+      "radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 97%), hsl(0, 0%, 100%))",
+    backgroundRepeat: "no-repeat",
+    ...theme.applyStyles("dark", {
       backgroundImage:
-        'radial-gradient(at 50% 50%, hsla(210, 100%, 16%, 0.5), hsl(220, 30%, 5%))',
+        "radial-gradient(at 50% 50%, hsla(210, 100%, 16%, 0.5), hsl(220, 30%, 5%))",
     }),
   },
-}))
-import { useLoginFormValidation } from '@/hooks/useLoginFormValidation'
+}));
+import { useLoginFormValidation } from "@/hooks/useLoginFormValidation";
 
-import { RootState } from '@/redux/store'
-import { loginUser } from '@/redux/user_extend/userSlice'
-import { useDispatch, useSelector } from 'react-redux'
-import { loginPrivilagedUser } from '@/redux/user_extend/userSlice'
+import { RootState } from "@/redux/store";
+import { loginUser } from "@/redux/user_extend/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { loginPrivilagedUser } from "@/redux/user_extend/userSlice";
 export function Login(props: { disableCustomTheme?: boolean }) {
-  const dispatch = useDispatch()
-  const { user, loading, error } = useSelector((state: RootState) => state.user)
+  const dispatch = useDispatch();
+  const { user, loading, error } = useSelector(
+    (state: RootState) => state.user
+  );
   const {
     emailError,
     emailErrorMessage,
     passwordError,
     passwordErrorMessage,
     validateInputs,
-  } = useLoginFormValidation()
-  const [open, setOpen] = React.useState(false)
+  } = useLoginFormValidation();
+  const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
 
   const handleClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const data = new FormData(event.currentTarget)
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
 
-    const email = data.get('email')
-    const password = data.get('password')
+    const email = data.get("email");
+    const password = data.get("password");
 
-    if (typeof email !== 'string' || typeof password !== 'string') {
-      console.error('Email or password is missing.')
-      return
+    if (typeof email !== "string" || typeof password !== "string") {
+      console.error("Email or password is missing.");
+      return;
     }
 
     if (!validateInputs(email, password)) {
-      return !email || !password
+      return !email || !password;
     }
 
     try {
-      await dispatch(loginPrivilagedUser({ email, password }) as any)
+      await dispatch(loginPrivilagedUser({ email, password }) as any);
     } catch (err) {
-      console.error('Login failed:', err)
+      console.error("Login failed:", err);
     }
-  }
+  };
 
   return (
     <AppTheme {...props}>
+      <MetaTags
+        type="advanced"
+        title="og:login - login page"
+        description="Välkommen att logga in. Please enter your credentials to access your account." // Updated description
+        url="http://localhost:5176/login" // Provide the full URL for Open Graph
+        canonicalUrl="http://localhost:5176/login" // Full URL for canonical
+      />
       <CssBaseline enableColorScheme />
-      <SignInContainer direction='column' justifyContent='space-between'>
+      <SignInContainer direction="column" justifyContent="space-between">
         <ColorModeSelect
-          sx={{ position: 'fixed', top: '1rem', right: '1rem' }}
+          sx={{ position: "fixed", top: "1rem", right: "1rem" }}
         />
-        <Card variant='outlined'>
+        <Card variant="outlined">
           <SitemarkIcon />
           <Typography
-            component='h1'
-            variant='h4'
-            sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
+            component="h1"
+            variant="h4"
+            sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
           >
             Sign in
           </Typography>
           <Box
-            component='form'
+            component="form"
             onSubmit={handleSubmit}
             noValidate
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              width: '100%',
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
               gap: 2,
             }}
           >
             <FormControl>
-              <FormLabel htmlFor='email'>Email</FormLabel>
+              <FormLabel htmlFor="email">Email</FormLabel>
               <TextField
                 error={emailError}
                 helperText={emailErrorMessage}
-                id='email'
-                type='email'
-                name='email'
-                placeholder='james@gmail.com'
-                autoComplete='email'
+                id="email"
+                type="email"
+                name="email"
+                placeholder="james@gmail.com"
+                autoComplete="email"
                 autoFocus
                 required
                 fullWidth
-                variant='outlined'
-                color={emailError ? 'error' : 'primary'}
-                sx={{ ariaLabel: 'email' }}
+                variant="outlined"
+                color={emailError ? "error" : "primary"}
+                sx={{ ariaLabel: "email" }}
               />
             </FormControl>
             <FormControl>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <FormLabel htmlFor='password'>Password</FormLabel>
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <FormLabel htmlFor="password">Password</FormLabel>
                 <Link
-                  component='button'
+                  component="button"
                   onClick={handleClickOpen}
-                  variant='body2'
-                  sx={{ alignSelf: 'baseline' }}
+                  variant="body2"
+                  sx={{ alignSelf: "baseline" }}
                 >
                   Forgot your password?
                 </Link>
@@ -164,35 +173,35 @@ export function Login(props: { disableCustomTheme?: boolean }) {
               <TextField
                 error={passwordError}
                 helperText={passwordErrorMessage}
-                name='password'
-                placeholder='secret••••••'
-                type='password'
-                id='password'
-                autoComplete='current-password'
+                name="password"
+                placeholder="secret••••••"
+                type="password"
+                id="password"
+                autoComplete="current-password"
                 autoFocus
                 required
                 fullWidth
-                variant='outlined'
-                color={passwordError ? 'error' : 'primary'}
+                variant="outlined"
+                color={passwordError ? "error" : "primary"}
               />
             </FormControl>
             <FormControlLabel
-              control={<Checkbox value='remember' color='primary' />}
-              label='Remember me'
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
             />
             <ForgotPassword open={open} handleClose={handleClose} />
-            <Button type='submit' fullWidth variant='contained'>
-              {' '}
+            <Button type="submit" fullWidth variant="contained">
+              {" "}
               {/**  onClick={validateInputs} */}
               Sign in
             </Button>
-            <Typography sx={{ textAlign: 'center' }}>
-              Don&apos;t have an account?{' '}
+            <Typography sx={{ textAlign: "center" }}>
+              Don&apos;t have an account?{" "}
               <span>
                 <Link
-                  href='/material-ui/getting-started/templates/sign-in/'
-                  variant='body2'
-                  sx={{ alignSelf: 'center' }}
+                  href="/material-ui/getting-started/templates/sign-in/"
+                  variant="body2"
+                  sx={{ alignSelf: "center" }}
                 >
                   Sign up
                 </Link>
@@ -200,21 +209,21 @@ export function Login(props: { disableCustomTheme?: boolean }) {
             </Typography>
           </Box>
           <Divider>or</Divider>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <Button
-              type='submit'
+              type="submit"
               fullWidth
-              variant='outlined'
-              onClick={() => alert('Sign in with Google')}
+              variant="outlined"
+              onClick={() => alert("Sign in with Google")}
               startIcon={<GoogleIcon />}
             >
               Sign in with Google
             </Button>
             <Button
-              type='submit'
+              type="submit"
               fullWidth
-              variant='outlined'
-              onClick={() => alert('Sign in with Facebook')}
+              variant="outlined"
+              onClick={() => alert("Sign in with Facebook")}
               startIcon={<FacebookIcon />}
             >
               Sign in with Facebook
@@ -223,7 +232,7 @@ export function Login(props: { disableCustomTheme?: boolean }) {
         </Card>
       </SignInContainer>
     </AppTheme>
-  )
+  );
 }
 
-export default Login
+export default Login;

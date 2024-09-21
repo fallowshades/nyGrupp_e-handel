@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import ProductCard from "../components/ProductCard";
-
+import MetaTags from "../seo/MetaTags";
 const HomePage = () => {
   const { items, status, error } = useSelector((state) => state.products);
 
@@ -10,6 +10,13 @@ const HomePage = () => {
 
   return (
     <div className="">
+      <MetaTags
+        type="advanced"
+        title="Hem - Start page"
+        description="Välkommen till min hemsida."
+        url="http://localhost:5176/" // Provide the full URL for Open Graph
+        canonicalUrl="http://localhost:5176/" // Full URL for canonical
+      />
       <div className="relative flex justify-center items-center flex-col ">
         <div className="p-20 w-full">
           <img

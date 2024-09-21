@@ -1,13 +1,14 @@
 import CartItem from "../components/CartItem";
 import { useSelector } from "react-redux";
 import { FaArrowRight } from "react-icons/fa";
-
+import MetaTags from "../seo/MetaTags";
 const CartPage = () => {
   const { cartItems, orderTotal } = useSelector((state) => state.cart);
 
   if (cartItems.length <= 0) {
     return (
       <div className="font-bold text-lg grid place-content-center align-middle h-full">
+        <MetaTags title="kundvagn" description="vad finns i kund vagnen" />
         Your cart is empty!
       </div>
     );
@@ -15,6 +16,13 @@ const CartPage = () => {
 
   return (
     <div className="container mx-auto p-6">
+      <MetaTags
+        type="advanced"
+        title="Hem - Start page"
+        description="Välkommen till min hemsida."
+        url="http://localhost:5176/CartPage" // Provide the full URL for Open Graph
+        canonicalUrl="http://localhost:5176/CartPage" // Full URL for canonical
+      />
       <div className="flex flex-col md:flex-row justify-between gap-8">
         <div className="w-full md:w-[65%] flex flex-col gap-4">
           <h2 className="font-bold text-3xl mb-4">Your Cart:</h2>
