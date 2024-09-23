@@ -1,24 +1,29 @@
-import { Helmet } from "react-helmet-async";
-import React from "react";
+import { Helmet } from 'react-helmet-async'
+import React from 'react'
+
+/**
+ * required and optional for better communication of contenthttps://ogp.me/
+ */
 type basic = {
-  type: "basic";
-  title: string;
-  description: string;
-};
+  type: 'basic' //type of obj required
+  title: string //required
+  description: string
+}
 
 type Advanced = {
-  type: "advanced";
-  title: string;
-  description: string;
-  url?: any;
-  canonicalUrl?: any;
-  ogImage?: any;
-};
+  type: 'advanced'
+  title: string
+  description: string
+  url?: any //required
+  canonicalUrl?: any
+  ogImage?: any
+  //image?
+}
 
-type Props = Advanced; // basic |
+type Props = Advanced // basic |
 
 const MetaTags = (props: Props) => {
-  const { type, title, description, url, canonicalUrl, ogImage } = props;
+  const { type, title, description, url, canonicalUrl, ogImage } = props
 
   return (
     <Helmet>
@@ -26,7 +31,7 @@ const MetaTags = (props: Props) => {
       <meta name="description" content={description} />
       <title>{title}</title>
 
-      {type === "advanced" && (
+      {type === 'advanced' && (
         <>
           {/* Canonical Link */}
           <link rel="canonical" href={canonicalUrl} />
@@ -40,10 +45,12 @@ const MetaTags = (props: Props) => {
 
           {/* Optional Charset and Viewport */}
           <meta charSet="UTF-8" />
+
+          {/**  <meta name="robots" content="noindex" /> */}
         </>
       )}
     </Helmet>
-  );
-};
+  )
+}
 
-export default MetaTags;
+export default MetaTags

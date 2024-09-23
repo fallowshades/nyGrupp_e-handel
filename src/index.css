@@ -7,3 +7,9 @@
     @apply mx-auto max-w-6xl px-8;
   }
 }
+
+@media screen and (min-width: 80rem) {
+  .responsive-hero {
+    margin: 1em 2em;
+  }
+}
