@@ -1,18 +1,19 @@
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addItem } from "../redux/slice/cartSlice";
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { addItem } from '../redux/slice/cartSlice'
 const ProductCard = ({ imgSrc, imgAlt, title, price, id }) => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   function handleRedirect(id) {
-    navigate(`/productid/${id}`);
+    navigate(`/productid/${id}`)
+    console.log('Create an ReactGa.event')
   }
 
   const addToCart = (e) => {
-    e.stopPropagation();
+    e.stopPropagation()
 
-    const amount = 1;
+    const amount = 1
     const cartProduct = {
       cartID: id,
       productID: id,
@@ -21,9 +22,10 @@ const ProductCard = ({ imgSrc, imgAlt, title, price, id }) => {
       title,
       price,
       amount: 1,
-    };
-    dispatch(addItem(cartProduct));
-  };
+    }
+    dispatch(addItem(cartProduct))
+    console.log('Create an ReactGa.event')
+  }
 
   return (
     <div
@@ -46,7 +48,7 @@ const ProductCard = ({ imgSrc, imgAlt, title, price, id }) => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProductCard;
+export default ProductCard

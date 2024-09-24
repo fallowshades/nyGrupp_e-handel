@@ -1,5 +1,5 @@
-import { useDispatch } from "react-redux";
-import { addItem } from "../redux/slice/cartSlice";
+import { useDispatch } from 'react-redux'
+import { addItem } from '../redux/slice/cartSlice'
 const ProductItem = ({
   id,
   imgSrc,
@@ -9,9 +9,9 @@ const ProductItem = ({
   description,
   onClick,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const addToCart = () => {
-    const amount = 1;
+    const amount = 1
     const cartProduct = {
       cartID: id,
       productID: id,
@@ -20,9 +20,10 @@ const ProductItem = ({
       title,
       price,
       amount,
-    };
-    dispatch(addItem(cartProduct));
-  };
+    }
+    dispatch(addItem(cartProduct))
+    console.log('Create an ReactGa.event')
+  }
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 border-gray-100 p-24 lg:px-80">
@@ -39,7 +40,7 @@ const ProductItem = ({
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProductItem;
+export default ProductItem

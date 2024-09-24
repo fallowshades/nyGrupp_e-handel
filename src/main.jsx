@@ -10,6 +10,14 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 
+import TagManager from 'react-gtm-module'
+
+const tagManagerArgs = {
+  gtmId: 'G-9SVXN53H8H',
+}
+
+TagManager.initialize(tagManagerArgs)
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>

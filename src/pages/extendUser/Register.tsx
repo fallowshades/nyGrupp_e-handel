@@ -78,6 +78,7 @@ export default function SignUp() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    console.log('Create an ReactGa.event')
     const data = new FormData(event.currentTarget)
     console.log({
       name: data.get('name'),
@@ -97,7 +98,7 @@ export default function SignUp() {
       <ThemeProvider theme={showCustomTheme ? SignUpTheme : defaultTheme}>
         <CssBaseline enableColorScheme />
 
-        <SignUpContainer direction='column' justifyContent='space-between'>
+        <SignUpContainer direction="column" justifyContent="space-between">
           <Stack
             sx={{
               justifyContent: 'center',
@@ -105,17 +106,17 @@ export default function SignUp() {
               p: 2,
             }}
           >
-            <Card variant='outlined'>
+            <Card variant="outlined">
               <SitemarkIcon />
               <Typography
-                component='h1'
-                variant='h4'
+                component="h1"
+                variant="h4"
                 sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
               >
                 Sign up
               </Typography>
               <Box
-                component='form'
+                component="form"
                 onSubmit={handleSubmit}
                 sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
               >
@@ -125,45 +126,45 @@ export default function SignUp() {
                     <>
                       ({' '}
                       <FormControl>
-                        <FormLabel htmlFor='name'>Full name</FormLabel>
+                        <FormLabel htmlFor="name">Full name</FormLabel>
                         <TextField
-                          autoComplete='name'
-                          name='name'
+                          autoComplete="name"
+                          name="name"
                           required
                           fullWidth
-                          id='name'
-                          placeholder='Jon Snow'
+                          id="name"
+                          placeholder="Jon Snow"
                           error={nameError}
                           helperText={nameErrorMessage}
                           color={nameError ? 'error' : 'primary'}
                         />
                       </FormControl>
                       <FormControl>
-                        <FormLabel htmlFor='email'>Email</FormLabel>
+                        <FormLabel htmlFor="email">Email</FormLabel>
                         <TextField
                           required
                           fullWidth
-                          id='email'
-                          placeholder='your@email.com'
-                          name='email'
-                          autoComplete='email'
-                          variant='outlined'
+                          id="email"
+                          placeholder="your@email.com"
+                          name="email"
+                          autoComplete="email"
+                          variant="outlined"
                           error={emailError}
                           helperText={emailErrorMessage}
                           color={passwordError ? 'error' : 'primary'}
                         />
                       </FormControl>
                       <FormControl>
-                        <FormLabel htmlFor='password'>Password</FormLabel>
+                        <FormLabel htmlFor="password">Password</FormLabel>
                         <TextField
                           required
                           fullWidth
-                          name='password'
-                          placeholder='••••••'
-                          type='password'
-                          id='password'
-                          autoComplete='new-password'
-                          variant='outlined'
+                          name="password"
+                          placeholder="••••••"
+                          type="password"
+                          id="password"
+                          autoComplete="new-password"
+                          variant="outlined"
                           error={passwordError}
                           helperText={passwordErrorMessage}
                           color={passwordError ? 'error' : 'primary'}
@@ -176,14 +177,14 @@ export default function SignUp() {
                 }
                 <FormControlLabel
                   control={
-                    <Checkbox value='allowExtraEmails' color='primary' />
+                    <Checkbox value="allowExtraEmails" color="primary" />
                   }
-                  label='I want to receive updates via email.'
+                  label="I want to receive updates via email."
                 />
                 <Button
-                  type='submit'
+                  type="submit"
                   fullWidth
-                  variant='contained'
+                  variant="contained"
                   onClick={validateInputs}
                 >
                   Sign up
@@ -192,8 +193,8 @@ export default function SignUp() {
                   Already have an account?{' '}
                   <span>
                     <Link
-                      href='/material-ui/getting-started/templates/sign-in/'
-                      variant='body2'
+                      href="/material-ui/getting-started/templates/sign-in/"
+                      variant="body2"
                       sx={{ alignSelf: 'center' }}
                     >
                       Sign in
@@ -206,18 +207,18 @@ export default function SignUp() {
               </Divider>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                 <Button
-                  type='submit'
+                  type="submit"
                   fullWidth
-                  variant='outlined'
+                  variant="outlined"
                   onClick={() => alert('Sign up with Google')}
                   startIcon={<GoogleIcon />}
                 >
                   Sign up with Google
                 </Button>
                 <Button
-                  type='submit'
+                  type="submit"
                   fullWidth
-                  variant='outlined'
+                  variant="outlined"
                   onClick={() => alert('Sign up with Facebook')}
                   startIcon={<FacebookIcon />}
                 >

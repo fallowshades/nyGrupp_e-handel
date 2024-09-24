@@ -83,6 +83,7 @@ export function Login(props: { disableCustomTheme?: boolean }) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    console.log('Create an ReactGa.event')
     const data = new FormData(event.currentTarget)
 
     const email = data.get('email')
@@ -107,21 +108,21 @@ export function Login(props: { disableCustomTheme?: boolean }) {
   return (
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
-      <SignInContainer direction='column' justifyContent='space-between'>
+      <SignInContainer direction="column" justifyContent="space-between">
         <ColorModeSelect
           sx={{ position: 'fixed', top: '1rem', right: '1rem' }}
         />
-        <Card variant='outlined'>
+        <Card variant="outlined">
           <SitemarkIcon />
           <Typography
-            component='h1'
-            variant='h4'
+            component="h1"
+            variant="h4"
             sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
           >
             Sign in
           </Typography>
           <Box
-            component='form'
+            component="form"
             onSubmit={handleSubmit}
             noValidate
             sx={{
@@ -132,30 +133,30 @@ export function Login(props: { disableCustomTheme?: boolean }) {
             }}
           >
             <FormControl>
-              <FormLabel htmlFor='email'>Email</FormLabel>
+              <FormLabel htmlFor="email">Email</FormLabel>
               <TextField
                 error={emailError}
                 helperText={emailErrorMessage}
-                id='email'
-                type='email'
-                name='email'
-                placeholder='james@gmail.com'
-                autoComplete='email'
+                id="email"
+                type="email"
+                name="email"
+                placeholder="james@gmail.com"
+                autoComplete="email"
                 autoFocus
                 required
                 fullWidth
-                variant='outlined'
+                variant="outlined"
                 color={emailError ? 'error' : 'primary'}
                 sx={{ ariaLabel: 'email' }}
               />
             </FormControl>
             <FormControl>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <FormLabel htmlFor='password'>Password</FormLabel>
+                <FormLabel htmlFor="password">Password</FormLabel>
                 <Link
-                  component='button'
+                  component="button"
                   onClick={handleClickOpen}
-                  variant='body2'
+                  variant="body2"
                   sx={{ alignSelf: 'baseline' }}
                 >
                   Forgot your password?
@@ -164,24 +165,24 @@ export function Login(props: { disableCustomTheme?: boolean }) {
               <TextField
                 error={passwordError}
                 helperText={passwordErrorMessage}
-                name='password'
-                placeholder='secret••••••'
-                type='password'
-                id='password'
-                autoComplete='current-password'
+                name="password"
+                placeholder="secret••••••"
+                type="password"
+                id="password"
+                autoComplete="current-password"
                 autoFocus
                 required
                 fullWidth
-                variant='outlined'
+                variant="outlined"
                 color={passwordError ? 'error' : 'primary'}
               />
             </FormControl>
             <FormControlLabel
-              control={<Checkbox value='remember' color='primary' />}
-              label='Remember me'
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
             />
             <ForgotPassword open={open} handleClose={handleClose} />
-            <Button type='submit' fullWidth variant='contained'>
+            <Button type="submit" fullWidth variant="contained">
               {' '}
               {/**  onClick={validateInputs} */}
               Sign in
@@ -190,8 +191,8 @@ export function Login(props: { disableCustomTheme?: boolean }) {
               Don&apos;t have an account?{' '}
               <span>
                 <Link
-                  href='/material-ui/getting-started/templates/sign-in/'
-                  variant='body2'
+                  href="/material-ui/getting-started/templates/sign-in/"
+                  variant="body2"
                   sx={{ alignSelf: 'center' }}
                 >
                   Sign up
@@ -202,18 +203,18 @@ export function Login(props: { disableCustomTheme?: boolean }) {
           <Divider>or</Divider>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             <Button
-              type='submit'
+              type="submit"
               fullWidth
-              variant='outlined'
+              variant="outlined"
               onClick={() => alert('Sign in with Google')}
               startIcon={<GoogleIcon />}
             >
               Sign in with Google
             </Button>
             <Button
-              type='submit'
+              type="submit"
               fullWidth
-              variant='outlined'
+              variant="outlined"
               onClick={() => alert('Sign in with Facebook')}
               startIcon={<FacebookIcon />}
             >

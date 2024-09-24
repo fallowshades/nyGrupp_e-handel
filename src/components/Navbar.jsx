@@ -32,50 +32,52 @@ function Navbar() {
 
   // if cart is empty, dont redirect, eme
   function handleCartClick() {
+    console.log('Create an ReactGa.event')
     if (numItemsInCart > 0) {
       navigate('/CartPage')
     }
   }
 
   function handleLogoClick() {
+    console.log('Create an ReactGa.event')
     navigate('/')
   }
 
   return (
-    <nav className=' shadow p-4 bg-gray-800 w-full'>
-      <div className='mx-auto flex items-center justify-between'>
-        <div className='hover:cursor-pointer' onClick={handleLogoClick}>
+    <nav className=" shadow p-4 bg-gray-800 w-full">
+      <div className="mx-auto flex items-center justify-between">
+        <div className="hover:cursor-pointer" onClick={handleLogoClick}>
           <img
-            src='logo.png'
-            alt='Logo'
-            className='w-[120px] h-[60px]  rounded-md'
+            src="logo.png"
+            alt="Logo"
+            className="w-[120px] h-[60px]  rounded-md"
           />
         </div>
-        <div className='flex justify-center'>
+        <div className="flex justify-center">
           <input
-            type='text'
+            type="text"
             value={input}
-            placeholder='Search'
+            placeholder="Search"
             onChange={handleSearch}
-            className='w-[80%] px-8 py-2 border border-gray-300 border-r-0 rounded-l-lg focus:outline-none'
+            className="w-[80%] px-8 py-2 border border-gray-300 border-r-0 rounded-l-lg focus:outline-none"
           />
-          <div className='py-2 bg-white rounded-r-lg pr-2'>
-            <FaSearch color='Gray' size={24} />
+          <div className="py-2 bg-white rounded-r-lg pr-2">
+            <FaSearch color="Gray" size={24} />
           </div>
         </div>
         <div>
           <button
-            className='border-white border py-3 px-8 rounded-lg hover:scale-105 flex'
+            className="border-white border py-3 px-8 rounded-lg hover:scale-105 flex"
             onClick={handleCartClick}
           >
-            <FaShoppingCart color='White' size={24} />
-            <span className=' pl-2 text-white'>{numItemsInCart}</span>
+            <FaShoppingCart color="White" size={24} />
+            <span className=" pl-2 text-white">{numItemsInCart}</span>
           </button>
         </div>
       </div>
 
       {input && (
-        <div className='searchItem'>
+        <div className="searchItem">
           <ul>
             {filteredProducts.length > 0 ? (
               filteredProducts.map((product) => (
@@ -89,35 +91,35 @@ function Navbar() {
                 </li>
               ))
             ) : (
-              <p className='text-white'>No products found</p>
+              <p className="text-white">No products found</p>
             )}
           </ul>
         </div>
       )}
-      <div className='align-element flex justify-center  '>
+      <div className="align-element flex justify-center  ">
         {user ? (
-          <div className='flex gap-x-2 sm:gap-x-8 items-center'>
-            <p className='text-xs sm:text-sm text-white'>
+          <div className="flex gap-x-2 sm:gap-x-8 items-center">
+            <p className="text-xs sm:text-sm text-white">
               Hello, {user.user?.username}
             </p>
             <button
-              className='btn btn-xs btn-outline btn-primary '
+              className="btn btn-xs btn-outline btn-primary "
               onClick={handleLogout}
             >
               logout
             </button>
           </div>
         ) : (
-          <div className='flex gap-x-6 justify-center items-center'>
+          <div className="flex gap-x-6 justify-center items-center">
             <Link
-              to='/login'
-              className='link link-hover text-xs sm:text-sm text-white'
+              to="/login"
+              className="link link-hover text-xs sm:text-sm text-white"
             >
               Sign in / Guest
             </Link>
             <Link
-              to='/register'
-              className='link link-hover text-xs sm:text-sm text-white'
+              to="/register"
+              className="link link-hover text-xs sm:text-sm text-white"
             >
               Create an Account
             </Link>

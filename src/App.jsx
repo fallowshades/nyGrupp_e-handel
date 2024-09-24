@@ -30,13 +30,45 @@ const router = createBrowserRouter([
   },
 ])
 
+import ReactGA from 'react-ga4'
+const TRACKING_ID = 'G-5Z45KQMX' // your Measurement ID
+ReactGA.initialize(TRACKING_ID)
+
+function AnalyticsTracker() {
+  const location = useLocation()
+
+  useEffect(() => {
+    ReactGA.send({
+      hitType: 'pageview',
+      page: location.pathname + location.search,
+    })
+  }, [location])
+
+  return null // This component doesn't render anything
+}
+
+import { useLocation } from 'react-router-dom'
 function App() {
+  // useEffect(() => {
+  //   ReactGA.initialize(TRACKING_ID)
+  //   // Send pageview with a custom path
+  //   ReactGA.send({
+  //     hitType: 'pageview',
+  //     page: '/landingpage',
+  //     title: 'Landing Page',
+  //   })
+  // }, [])
+
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchProducts())
   }, [dispatch])
-  return <RouterProvider router={router} />
+  return (
+    <RouterProvider router={router}>
+      <AnalyticsTracker />
+    </RouterProvider>
+  )
 }
 
 export default App
