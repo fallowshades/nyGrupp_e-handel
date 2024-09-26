@@ -206,7 +206,23 @@ const sources = [
   {sources.map((source, index) => (
     <source key={index} media={source.media} srcSet={source.srcSet} />
   ))}
+  <img src="hero.jpg" alt="Fashion" className="w-full h-[400px] shadow-lg" />
 </picture>
+```
+
+index.html
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+```
+
+homepage
+
+- hero is a section
+
+```jsx
+  <section className="relative flex justify-center items-center flex-col  ">
+        <div className="p-20 w-full">
 ```
 
 #### prestanda optimering

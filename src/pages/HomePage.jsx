@@ -33,7 +33,7 @@ const HomePage = () => {
         url="http://localhost:5176/" // Provide the full URL for Open Graph
         canonicalUrl="http://localhost:5176/" // Full URL for canonical
       />
-      <div className="relative flex justify-center items-center flex-col  ">
+      <section className="relative flex justify-center items-center flex-col  ">
         <div className="p-20 w-full">
           {/**
         *    <img
@@ -58,7 +58,7 @@ const HomePage = () => {
           <h3 className="text-3xl p-5">More than what you might expect.</h3>
           <p className="text-2xl">Fashion, Beauty, Design and much more!</p>
         </div>
-      </div>
+      </section>
 
       <ul className="displayProduct grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 border-gray-100 border m-4 p-10">
         {items.map((product) => (
