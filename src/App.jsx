@@ -31,13 +31,21 @@ const router = createBrowserRouter([
 ])
 
 import ReactGA from 'react-ga4'
-const TRACKING_ID = 'G-5Z45KQMX' // your Measurement ID
+const TRACKING_ID = 'G-85HJSPKQCY' // your Measurement ID
 ReactGA.initialize(TRACKING_ID)
 
 function AnalyticsTracker() {
   const location = useLocation()
 
   useEffect(() => {
+    //manually believe the lib normally get anyway
+    // window.dataLayer.push({
+    //   event: 'pageview',
+    //   page: {
+    //     url: location,
+    //     title: title,
+    //   },
+    // })
     ReactGA.send({
       hitType: 'pageview',
       page: location.pathname + location.search,

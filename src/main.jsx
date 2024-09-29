@@ -13,7 +13,7 @@ import '@fontsource/roboto/700.css'
 import TagManager from 'react-gtm-module'
 
 const tagManagerArgs = {
-  gtmId: 'G-9SVXN53H8H',
+  gtmId: 'GTM-5Z45KQMX',
 }
 
 TagManager.initialize(tagManagerArgs)

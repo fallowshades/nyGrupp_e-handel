@@ -6,20 +6,81 @@
 
 #### session navigate/redirect --> traversal tracking
 
+[cro] conversation optimization process https://www.hotjar.com/conversion-rate-optimization/
+
+[spårnings-koder-och-google-analytics] combine tools https://www.hotjar.com/conversion-rate-optimization/
+
 [] email marketing (acuquisition)
 
-[ga4] https://www.npmjs.com/package/react-ga4
-[gtm-module] https://www.npmjs.com/package/react-gtm-module
+- session src + convesions
+  [utm_medium, utm_source, utm_campaign, utm_term, utm_content, utm_id] -[type-traffic] user acquisition vs traffic acquisition [https://ga-dev-tools.google/campaign-url-builder/]
+  [ga4] https://www.npmjs.com/package/react-ga4
+  [gtm-module] https://www.npmjs.com/package/react-gtm-module
 
 ```sh
 npm i react-ga4
 ```
 
+- test
+  [initial-setup] https://github.com/DutenLobarn/fmw23vecka39/blob/26sept-googleanalytics-eventstracking-demo/src/App.jsx (bellow done all pages)
+  - setup link in tagmanager for page view and custom events (part in cro process)
+
 #### set up trackable
+
+[google-tagmanager-benefit-how-send?]
+
+index.html
+
+- missed this
+
+```html
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-85HJSPKQCY"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || []
+  function gtag() {
+    dataLayer.push(arguments)
+  }
+  gtag('js', new Date())
+
+  gtag('config', 'G-85HJSPKQCY')
+</script>
+```
+
+1. activity + recommended events
+2. custom evt --> dimensions
+
+[användar-flöde]
+
+HomePage.jsx
+
+CartPage.jsx
+
+[Product id].jsx
+
+Login.tsx
+
+Register.tsx
+
+[event-tracking-datalayer]
+
+- custom events
 
 #### DAM and npm
 
+[x]Spårningskoder & Google analytics
+
 #### submit tags
+
+[x]Google Tag manager & event tracking
+
+[x]Användarflödesanalys
+
+[x]Dokumentation & repportering
+
+### initial setup
 
 main.jsx
 

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
@@ -20,13 +20,20 @@ const Footer = () => {
             Contact Us
           </Link>
         </li>
+        <li>
+          <a href="#" className="twitter-share-button">
+            <i>
+              <span>Tweet</span>
+            </i>
+          </a>
+        </li>
       </ul>
       <p className="mt-4">
         &copy; {new Date().getFullYear()} NYA GRUPPEN Webshop. All rights
         reserved.
       </p>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer
