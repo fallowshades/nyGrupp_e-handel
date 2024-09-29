@@ -125,6 +125,8 @@ export function Login(props: { disableCustomTheme?: boolean }) {
             component="form"
             onSubmit={handleSubmit}
             noValidate
+            id="sign-in-form"
+            className="sign-in-form"
             sx={{
               display: 'flex',
               flexDirection: 'column',

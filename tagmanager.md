@@ -154,3 +154,45 @@ ProductCard.jsx
 ProductItem.jsx
 Login.tsx
 Register.tsx
+
+#### id page
+
+```jsx
+useEffect(() => {
+  if (clickedProduct[0]) {
+    window.dataLayer = window.dataLayer || []
+    window.dataLayer.push({
+      event: 'view_product',
+      product_id: clickedProduct[0].id,
+      product_name: clickedProduct[0].name,
+      product_category: clickedProduct[0].category,
+      product_price: clickedProduct[0].price,
+    })
+  }
+}, [clickedProduct])
+```
+
+Footer.jsx
+
+```jsx
+<li>
+  <a href="#" className="twitter-share-button">
+    <i>
+      <span>Tweet</span>
+    </i>
+  </a>
+</li>
+```
+
+#### form
+
+Login.tsx
+
+```tsx
+  <Box
+           ...
+            id="sign-in-form"
+            className="sign-in-form"
+           ...
+          >
+```
