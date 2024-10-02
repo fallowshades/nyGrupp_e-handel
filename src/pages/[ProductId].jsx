@@ -16,7 +16,7 @@ const ProductId = () => {
         event: 'view_product',
         product_id: clickedProduct[0].id,
         product_name: clickedProduct[0].name,
-        product_category: clickedProduct[0].category,
+        product_category: clickedProduct[0].title,
         product_price: clickedProduct[0].price,
       })
     }

@@ -1,12 +1,12 @@
-import { useSelector } from "react-redux";
-import ProductCard from "../components/ProductCard";
+import { useSelector } from 'react-redux'
+import ProductCard from '../components/ProductCard'
 
 const HomePage = () => {
-  const { items, status, error } = useSelector((state) => state.products);
+  const { items, status, error } = useSelector((state) => state.products)
 
-  if (status === "loading") return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-  console.log(items, status, error);
+  if (status === 'loading') return <div>Loading...</div>
+  if (error) return <div>Error: {error}</div>
+  console.log(items, status, error)
 
   return (
     <div className="">
@@ -17,6 +17,12 @@ const HomePage = () => {
             alt="Fashion"
             className="w-full h-[400px] shadow-lg"
           />
+          <button
+            id="BIG CALL-TO ACTION BUTTON"
+            className="BIG-CALL-TO-ACTION-BUTTON"
+          >
+            CTA
+          </button>
         </div>
 
         <div className="absolute left-10 flex flex-col text-white text-center pl-10">
@@ -25,7 +31,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      <ul className="displayProduct grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 border-gray-100 border m-4 p-10">
+      <ul className="displayProduct grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 border-gray-100 border m-4 p-10 ">
         {items.map((product) => (
           <li key={product.id}>
             <ProductCard
@@ -39,7 +45,7 @@ const HomePage = () => {
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage
