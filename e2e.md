@@ -4,6 +4,8 @@
 
 ###
 
+[github] https://github.com/fallowshades/nyGrupp_e-handel/blob/tag-manager/tagmanager.md
+
 #### reasoning
 
 WHY

@@ -107,7 +107,10 @@ export function Login(props: { disableCustomTheme?: boolean }) {
   return (
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
-      <SignInContainer direction='column' justifyContent='space-between'>
+      <SignInContainer
+        direction='column'
+        justifyContent='space-between'
+      >
         <ColorModeSelect
           sx={{ position: 'fixed', top: '1rem', right: '1rem' }}
         />
@@ -136,6 +139,7 @@ export function Login(props: { disableCustomTheme?: boolean }) {
               <TextField
                 error={emailError}
                 helperText={emailErrorMessage}
+                data-cy='login-email' // Add data-cy for Cypress
                 id='email'
                 type='email'
                 name='email'
@@ -162,6 +166,7 @@ export function Login(props: { disableCustomTheme?: boolean }) {
                 </Link>
               </Box>
               <TextField
+                data-cy='login-password' // Add data-cy for Cypress
                 error={passwordError}
                 helperText={passwordErrorMessage}
                 name='password'
@@ -177,11 +182,23 @@ export function Login(props: { disableCustomTheme?: boolean }) {
               />
             </FormControl>
             <FormControlLabel
-              control={<Checkbox value='remember' color='primary' />}
+              control={
+                <Checkbox
+                  value='remember'
+                  color='primary'
+                />
+              }
               label='Remember me'
             />
-            <ForgotPassword open={open} handleClose={handleClose} />
-            <Button type='submit' fullWidth variant='contained'>
+            <ForgotPassword
+              open={open}
+              handleClose={handleClose}
+            />
+            <Button
+              type='submit'
+              fullWidth
+              variant='contained'
+            >
               {' '}
               {/**  onClick={validateInputs} */}
               Sign in
