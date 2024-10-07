@@ -1,4 +1,8 @@
 /**
+ * test sequences
+ */
+
+/**
  * describe block with * it methods, but what beforeEach
  */
 describe('login form', () => {

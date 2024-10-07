@@ -13,6 +13,10 @@
 //   })
 // })
 
+/**
+ * crazy testing
+ */
+
 describe('Logo Navigation', () => {
   it('should navigate to home page when the logo is clicked', () => {
     // Intercept API call if necessary
@@ -32,6 +36,11 @@ describe('Logo Navigation', () => {
     // Verify the URL
     cy.url().should('eq', Cypress.config().baseUrl + '/')
   })
+})
+
+it('header with data test command', () => {
+  cy.visit('ProductId/1')
+  cy.getDataTest('id-header').should('exist')
 })
 
 // // it('can log out programmatically', () => {

@@ -24,7 +24,21 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
+
+Cypress.Commands.add('getDataTest', (dataTestSelector) => {
+  return cy.get(`[data-cy="${dataTestSelector}"]`)
+})
+
+declare namespace Cypress {
+  interface Chainable {
+    /**
+     * Custom command to select DOM element by data-cy attribute
+     * @example cy.getDataTest('submit-button')
+     */
+    getDataTest(dataTestSelector: string): Chainable<JQuery<HTMLElement>>
+  }
+}
+
 // declare global {
 //   namespace Cypress {
 //     interface Chainable {
