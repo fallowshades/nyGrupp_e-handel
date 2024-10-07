@@ -63,6 +63,8 @@ export default defineConfig({
 npm run cy:open
 ```
 
+#### links valid ancor
+
 -resilliant to change
 
 - best practive only test websites in ctrl
@@ -214,6 +216,8 @@ it('require valid username and password', () => {
     cy.hash().should('eq','#/')
 // })
 ```
+
+#### ...
 
 ```jsx
 describe('/settings', () => {

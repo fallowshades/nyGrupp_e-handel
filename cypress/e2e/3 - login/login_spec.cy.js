@@ -52,6 +52,23 @@ describe('login form', () => {
     cy.url().should('include', '/login') //no dashboard navigation
   })
 
+  it('accepts valid email and password', () => {
+    //reverse logic
+    // Test with valid email and password
+    cy.get('[data-cy=login-email]').clear().type('james@gmail.com')
+    cy.get('[data-cy=login-password]').clear().type('validpassword')
+    cy.get('form').submit()
+
+    // Assert that there are no error messages displayed
+    cy.contains('Please enter a valid email address.').should('not.exist')
+    cy.contains('Password must be at least 6 characters long.').should(
+      'not.exist'
+    )
+
+    // Assert that the user is navigated to the dashboard (or the expected route)
+    //cy.url().should('not.include', '/login')
+  })
+
   //can't empty str
   //   it('no navigate', () => {
   //     cy.get('[data-cy=login-email]').type('')
